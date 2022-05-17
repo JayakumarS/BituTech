@@ -15,4 +15,5 @@ public class SalesQuoteQueryUtil {
 	public static final String SELECT_SALES_QUOTE_DTL = "select sales_quote_no as countValue,item_id as item,qty as qty ,quot_price as price from sales_quote_dtl where sales_quote_no=?";
 	public static final String DELETE_SALES_ORDER_HDR = "delete from sales_order_hdr where sales_quote_no=?";
 	public static final String DELETE_SALES_QUOTE_DTL = "delete from sales_quote_dtl where sales_quote_no=?";
+	public static final String GET_SALES_ORDER_LIST = "select customer_code as id ,sales_quote_no as text from sales_quote_hdr";
 }

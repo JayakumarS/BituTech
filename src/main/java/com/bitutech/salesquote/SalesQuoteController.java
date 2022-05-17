@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bitutech.salesorder.SalesOrderResultBean;
+
 
 
 @RestController
@@ -86,4 +88,12 @@ public class SalesQuoteController {
 		}
 		return objResultBean;
 	}
+	
+//	@RequestMapping(value = "/getSalesOrderListService")
+//   	public SalesOrderResultBean getSalesOrderListService() throws Exception {
+//		SalesOrderResultBean objResultBean = new SalesOrderResultBean();
+//		objResultBean.setCustomerList(salesQuoteService.getSalesOrderListService());
+//		objResultBean.setSuccess(true);
+//   		return objResultBean;
+//   	}
 }

@@ -2,6 +2,8 @@ package com.bitutech.salesorder;
 
 import java.util.List;
 
+import com.bitutech.salesquote.SalesQuoteResultBean;
+
 
 
 public interface SalesOrderService {
@@ -19,5 +21,9 @@ public interface SalesOrderService {
     public List<SalesOrderBean> getItemNameList() throws Exception;
 
 	List<SalesOrderBean> getCustomerList()throws Exception;
+
+	List<SalesOrderBean> getSalesOrderListService() throws Exception;
+
+	SalesOrderResultBean getfetchSalesQuote(String salesQuote) throws Exception;
 
 }
