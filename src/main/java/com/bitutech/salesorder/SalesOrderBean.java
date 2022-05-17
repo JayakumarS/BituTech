@@ -10,14 +10,11 @@ public class SalesOrderBean {
 	private String validFrom;
 	private String validTo;
 	private String currency;
-	private String termCondition;
 	private String deliveryDate;
 	private String id;
 	private String text;
 	private String countValue;
 	private String salesOrderNo;
-	private String salesQuoteNo;
-	private String expectedDate;
 	private List<SalesOrderdtlBean> salesOrderdtlBean;
 	
 	
@@ -81,24 +78,6 @@ public class SalesOrderBean {
 	}
 	public void setCountValue(String countValue) {
 		this.countValue = countValue;
-	}
-	public String getSalesQuoteNo() {
-		return salesQuoteNo;
-	}
-	public void setSalesQuoteNo(String salesQuoteNo) {
-		this.salesQuoteNo = salesQuoteNo;
-	}
-	public String getTermCondition() {
-		return termCondition;
-	}
-	public void setTermCondition(String termCondition) {
-		this.termCondition = termCondition;
-	}
-	public String getExpectedDate() {
-		return expectedDate;
-	}
-	public void setExpectedDate(String expectedDate) {
-		this.expectedDate = expectedDate;
 	}
 	
 	

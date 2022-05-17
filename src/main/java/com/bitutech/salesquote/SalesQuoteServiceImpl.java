@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitutech.salesorder.SalesOrderBean;
-
 
 
 @Service
@@ -47,12 +45,6 @@ public class SalesQuoteServiceImpl implements SalesQuoteService {
 	public SalesQuoteResultBean delete(String bean) throws Exception {
 		// TODO Auto-generated method stub
 		return salesQuoteDao.delete(bean);
-	}
-
-	@Override
-	public List<SalesOrderBean> getSalesOrderListService() throws Exception {
-		// TODO Auto-generated method stub
-		return salesQuoteDao.getSalesOrderListService();
 	}
 
 

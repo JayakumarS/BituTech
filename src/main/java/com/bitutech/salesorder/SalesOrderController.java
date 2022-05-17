@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitutech.countrymaster.CountryMasterResultBean;
-import com.bitutech.salesquote.SalesQuoteResultBean;
-
 
 
 
@@ -100,33 +97,4 @@ public class SalesOrderController {
 		}
 		return objResultBean;
 	}
-	
-	// Sales Quote Dropdown List
-	@RequestMapping(value = "/getSalesOrderListService")
-   	public SalesOrderResultBean getSalesOrderListService() throws Exception {
-		SalesOrderResultBean objResultBean = new SalesOrderResultBean();
-		objResultBean.setSalesOrderList(salesOrderService.getSalesOrderListService());
-		objResultBean.setSuccess(true);
-   		return objResultBean;
-   	}
-	
-	
-	@GetMapping(value="/getfetchSalesQuote")
-	public SalesOrderResultBean getfetchSalesQuote(@RequestParam("salesQuote") String salesQuote) {
-		
-//		Integer value= Integer.parseInt(salesQuote);
-		
-		SalesOrderResultBean objResultBean = new SalesOrderResultBean();
-		try {
-			objResultBean = salesOrderService.getfetchSalesQuote(salesQuote);
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			
-		}
-		return objResultBean;
-	}
-
-	
 }

@@ -2,8 +2,6 @@ package com.bitutech.salesquote;
 
 import java.util.List;
 
-import com.bitutech.salesorder.SalesOrderBean;
-
 
 
 public interface SalesQuoteDao {
@@ -18,8 +16,6 @@ public interface SalesQuoteDao {
 
 
 	List<SalesQuoteBean> getSalesQuoteList() throws Exception;
-
-	List<SalesOrderBean> getSalesOrderListService() throws Exception;
 
 //	List<SalesQuoteBean> getUomcateList() throws Exception;
 
