@@ -1,9 +1,11 @@
 package com.bitutech.purchaserequest;
 
+import java.util.List;
+
 public class PurchaseRequestBean {
 	
 	private String company;
-	private Integer requisitionNo;
+	private String requisitionNo;
 	private Integer requestType;
 	private String requestDate;
 	private Integer requisitionId;
@@ -70,10 +72,10 @@ public class PurchaseRequestBean {
 	public void setCostCenter(String costCenter) {
 		this.costCenter = costCenter;
 	}
-	public Integer getRequisitionNo() {
+	public String getRequisitionNo() {
 		return requisitionNo;
 	}
-	public void setRequisitionNo(Integer requisitionNo) {
+	public void setRequisitionNo(String requisitionNo) {
 		this.requisitionNo = requisitionNo;
 	}
 	public Integer getRequisitionId() {
@@ -83,4 +85,15 @@ public class PurchaseRequestBean {
 		this.requisitionId = requisitionId;
 	}
 
+private List<PurchaseRequestDtlBean> purchaseRequestDtlBean;
+
+public List<PurchaseRequestDtlBean> getPurchaseRequestDtlBean() {
+	return purchaseRequestDtlBean;
+}
+public void setJobTitle(String jobTitle) {
+	this.jobTitle = jobTitle;
+}
+public void setPurchaseRequestDtlBean(List<PurchaseRequestDtlBean> purchaseRequestDtlBean) {
+	this.purchaseRequestDtlBean = purchaseRequestDtlBean;
+}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class PurchaseRequestServiceImpl implements PurchaseRequestService {
 	@Autowired
@@ -22,6 +24,17 @@ public class PurchaseRequestServiceImpl implements PurchaseRequestService {
 				
 			
 	}
+	@Override
+	public PurchaseRequestResultBean getRequisitionNo() throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseRequestDao.getRequisitionNo();
+	}
+
+//	@Override
+//	public PurchaseRequestResultBean getRequisitionNoList() throws Exception {
+//		// TODO Auto-generated method stub
+//		return purchaseRequestDao.getRequisitionNoList();
+//	}
 	
 //	@Override
 //	public List<PurchaseRequestBean> getUomcategoryList() throws Exception {

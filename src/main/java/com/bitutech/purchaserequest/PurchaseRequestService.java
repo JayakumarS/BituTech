@@ -14,6 +14,10 @@ public interface PurchaseRequestService {
 
 	public List<PurchaseRequestBean> getPurchaseRequestList() throws Exception;
 
+	PurchaseRequestResultBean getRequisitionNo() throws Exception;
+
+//	PurchaseRequestResultBean getRequisitionNoList() throws Exception;
+
 //	public List<PurchaseRequestBean> getUomcategoryList() throws Exception;
 
 }
