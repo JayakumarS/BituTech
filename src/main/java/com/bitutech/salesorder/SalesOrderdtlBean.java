@@ -9,6 +9,7 @@ public class SalesOrderdtlBean {
 	private String createdBy;
 	private Integer id;
 	private String text;
+	private String salesQuoteNo;
 	
 	
 	public Integer getId() {
@@ -52,6 +53,12 @@ public class SalesOrderdtlBean {
 	}
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	public String getSalesQuoteNo() {
+		return salesQuoteNo;
+	}
+	public void setSalesQuoteNo(String salesQuoteNo) {
+		this.salesQuoteNo = salesQuoteNo;
 	}
 	
 	

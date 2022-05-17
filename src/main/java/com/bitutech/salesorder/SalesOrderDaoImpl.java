@@ -16,6 +16,7 @@ import com.bitutech.billofmaterial.BillOfMaterialQueryUtil;
 import com.bitutech.countrymaster.CountryMasterBean;
 import com.bitutech.countrymaster.CountryMasterQueryUtil;
 import com.bitutech.salesquote.SalesQuoteBean;
+import com.bitutech.salesquote.SalesQuoteDetailBean;
 import com.bitutech.salesquote.SalesQuoteQueryUtil;
 import com.bitutech.salesquote.SalesQuoteResultBean;
 import com.bitutech.workorder.WorkOrderDtlBean;
@@ -42,7 +43,9 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 			salesOrderMap.put("currency", bean.getCurrency());
 			salesOrderMap.put("deliveryDate", bean.getDeliveryDate());
 			salesOrderMap.put("id", bean.getId());
-			salesOrderMap.put("text", bean.getText());
+			salesOrderMap.put("termCondition", bean.getTermCondition());
+			salesOrderMap.put("salesQuoteNo", bean.getSalesQuoteNo());
+
 			salesOrderMap.put("modifiedBy","E0001");
 			String countValue =  jdbcTemplate.queryForObject(SalesOrderQueryUtil.GETCOUNT, String.class);
 			salesOrderMap.put("countValue", countValue);
@@ -126,7 +129,8 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 			salesOrderMap.put("currency", bean.getCurrency());
 			salesOrderMap.put("deliveryDate", bean.getDeliveryDate());
 			salesOrderMap.put("id", bean.getId());
-			salesOrderMap.put("text", bean.getText());
+			salesOrderMap.put("salesQuoteNo", bean.getSalesQuoteNo());
+			salesOrderMap.put("termCondition", bean.getTermCondition());
 			salesOrderMap.put("modifiedBy","E0001");
  			salesOrderMap.put("countValue", bean.getCountValue());
 			String salesOrder =  bean.getCountValue();
@@ -187,6 +191,37 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 			e.printStackTrace();
 		}
 		return salesOrderBean;
+	}
+
+	@Override
+	public List<SalesOrderBean> getSalesOrderListService() {
+		// TODO Auto-generated method stub
+		List<SalesOrderBean> salesOrderBean = new ArrayList<SalesOrderBean>();
+		try {
+			salesOrderBean = jdbcTemplate.query(SalesOrderQueryUtil.GET_SALES_ORDER_LIST, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class));
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return salesOrderBean;
+	}
+
+	@Override
+	public SalesOrderResultBean getfetchSalesQuote(String bean) throws Exception {
+		// TODO Auto-generated method stub
+		SalesOrderResultBean resultBean = new SalesOrderResultBean();
+		resultBean.setSuccess(false);
+		try {
+			resultBean.setSalesOrderBean(jdbcTemplate.queryForObject(SalesOrderQueryUtil.SELECT_SALES_QUOTE_HDR,new Object[] { bean }, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class)));
+			List<SalesOrderdtlBean> salesOrderdtlBean = jdbcTemplate.query(SalesOrderQueryUtil.SELECT_SALES_QUOTE_DTL,new Object[] { bean },new BeanPropertyRowMapper<SalesOrderdtlBean>(SalesOrderdtlBean.class));	
+			resultBean.setSalesOrderdtlBean(salesOrderdtlBean);		
+			resultBean.setSuccess(true);
+		}
+		catch(Exception e) {          
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+		}
+		return resultBean;
 	}
 
 

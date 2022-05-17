@@ -53,6 +53,18 @@ public class SalesOrderServiceImpl implements SalesOrderService {
 		return salesOrderDao.getCustomerList();
 	}
 
+	@Override
+	public List<SalesOrderBean> getSalesOrderListService() throws Exception {
+		// TODO Auto-generated method stub
+		return salesOrderDao.getSalesOrderListService();
+	}
+
+	@Override
+	public SalesOrderResultBean getfetchSalesQuote(String salesQuote) throws Exception {
+		// TODO Auto-generated method stub
+		return salesOrderDao.getfetchSalesQuote(salesQuote);
+	}
+
 
 	
 

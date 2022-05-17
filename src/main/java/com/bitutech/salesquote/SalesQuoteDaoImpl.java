@@ -11,6 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bitutech.salesorder.SalesOrderBean;
+import com.bitutech.salesorder.SalesOrderQueryUtil;
+
 @Repository
 public class SalesQuoteDaoImpl implements SalesQuoteDao {
 	
@@ -173,6 +176,19 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 					resultBean.setSuccess(false);
 				}	
 				return resultBean;
+			}
+
+			@Override
+			public List<SalesOrderBean> getSalesOrderListService() throws Exception {
+				// TODO Auto-generated method stub
+				List<SalesOrderBean> salesOrderBean = new ArrayList<SalesOrderBean>();
+				try {
+					salesOrderBean = jdbcTemplate.query(SalesQuoteQueryUtil.GET_SALES_ORDER_LIST, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class));
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				return salesOrderBean;
 			}
 
 
