@@ -15,7 +15,7 @@ public class GRNBean {
 	private String poNo;
 	private String grnDate;
 	private int purchaseType;
-	private String poRequisitionId;
+	private int poRequisitionId;
 	private String poRequisition;
 	private String poRequisitionDate;
 	private String delOrderNo;
@@ -102,12 +102,7 @@ public class GRNBean {
 	public void setScheduleData(List<GRNPurchaseOrderBean> scheduleData) {
 		this.scheduleData = scheduleData;
 	}
-	public String getPoRequisitionId() {
-		return poRequisitionId;
-	}
-	public void setPoRequisitionId(String poRequisitionId) {
-		this.poRequisitionId = poRequisitionId;
-	}
+	
 	public String getPoRequisition() {
 		return poRequisition;
 	}
@@ -552,6 +547,12 @@ public class GRNBean {
 	}
 	public void setPoDetailData(List<GRNPurchaseOrderBean> poDetailData) {
 		this.poDetailData = poDetailData;
+	}
+	public int getPoRequisitionId() {
+		return poRequisitionId;
+	}
+	public void setPoRequisitionId(int poRequisitionId) {
+		this.poRequisitionId = poRequisitionId;
 	}
 
 	//private String poAmendNo;

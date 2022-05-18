@@ -204,7 +204,7 @@ public class GRNDaoImpl implements GRNDao {
 			bean.setGrnCode(grnAutoIncrementNo());
 			int grnId = 0;
 			bean.setCreatedBy("E0001");
-			grnId = jdbcTemplate.queryForObject(GRNQueryUtil.SAVE_GRN_HDR, new Object[] { bean.getGrnCode(), bean.getGrnDate(), bean.getPoId(), bean.getPoRequisition(), bean.getVendorId(), bean.getDelOrderNo(), bean.getDelOrderDate(), bean.getInvoiceNo(), bean.getInvoiceDate(), bean.getDeliveryMthd(), bean.getTransMode(), bean.getLocId(), bean.getDstLocId(), bean.getQcLocationId(), bean.getCompanyId(), bean.getDueDate(), bean.getDescription(), bean.getFreight(), bean.getOtherCharges(), bean.getCreatedBy() }, Integer.class);
+			grnId = jdbcTemplate.queryForObject(GRNQueryUtil.SAVE_GRN_HDR, new Object[] { bean.getGrnCode(), bean.getGrnDate(), bean.getPoId(), bean.getPoRequisitionId(), bean.getVendorId(), bean.getDelOrderNo(), bean.getDelOrderDate(), bean.getInvoiceNo(), bean.getInvoiceDate(), bean.getDeliveryMthd(), bean.getTransMode(), bean.getLocId(), bean.getDstLocId(), bean.getCompanyId(), bean.getDueDate(), bean.getDescription(), bean.getFreight(), bean.getOtherCharges(), bean.getCreatedBy() }, Integer.class);
 			// int grnId = keyHolder.getKey().intValue();
 
 			if (grnId > 0) {
@@ -315,18 +315,19 @@ public class GRNDaoImpl implements GRNDao {
 	
 	private boolean saveGrnBatchDtl(GRNPurchaseOrderBean objGRNPurchaseOrderBean, int grnDtlId) throws Exception {
 		boolean isSuccess = false;
-		Connection con = null;
+		
+		int count = 0;
 		try {
 			List<GRNPurchaseOrderBean> alDetailList = objGRNPurchaseOrderBean.getBatchDetails();
 			for (GRNPurchaseOrderBean objBean : alDetailList) {
 
-				String expiryDate = "";
-				// int dtlStatus =
-				// jdbcTemplate.update(GRNQueryUtil.SAVE_GRN_BATCH_DTL, new
-				// Object[] { grnDtlId, objBean.getBatchItemId(),
-				// objBean.getLotNo(), objBean.getBatchQty(),
-				// objBean.getExpiryDate(), objBean.getManufactureDef(),
-				// objBean.getMrp(), objBean.getOriginalConvertedQty() });
+//								
+//				count = jdbcTemplate.update(GRNQueryUtil.COUNT_GRN_BATCH_DTL, new Object[] { grnDtlId});
+//				
+//				if (count > 0) {
+//				
+//					jdbcTemplate.update(GRNQueryUtil.DELETE_GRN_BATCH_DTL, new Object[] { grnDtlId});
+//				}
 				int dtlStatus = jdbcTemplate.update(GRNQueryUtil.SAVE_GRN_BATCH_DTL, new Object[] { grnDtlId, objBean.getBatchItemId(), objBean.getLotNo(), objBean.getBatchQty(), objBean.getManufactureDef(), objBean.getMrp(), objBean.getOriginalConvertedQty() });
 
 				if (dtlStatus > 0) {
@@ -354,14 +355,14 @@ public class GRNDaoImpl implements GRNDao {
 //				srcLocId = getTransitLocation(transLoc, jdbcTemplate);
 //
 //			} else if (type == 142 || type == 161) {
-//				destLocId = getTransitLocation(transLoc, jdbcTemplate);
+//				destLocId = getTransitLocation(transLoc, jdbcTemplate) ;
 //
 //			} else 
-			if (type == 88) {
-				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
-				if (isQc)
-					srclocId = jdbcTemplate.queryForObject(GRNQueryUtil.GET_QC_LOCATION, new Object[] { formCode }, Integer.class);
-			} 
+//			if (type == 88) {
+//				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
+//				if (isQc)
+//				srclocId = jdbcTemplate.queryForObject(GRNQueryUtil.GET_QC_LOCATION, new Object[] { formCode }, Integer.class);
+//			} 
 //				else if (type == 149) {
 //				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
 //				if (isQc)
@@ -413,11 +414,11 @@ public class GRNDaoImpl implements GRNDao {
 							exdate = df.parse(batchAttributeBean.getExpiryDate());
 
 						}
-						if (type == 106) {//need to check the types
-							jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getItemId(), batchAttributeBean.getBatchNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufacturer(), batchAttributeBean.getMrpPrice(), batchLocation, null, 0, batchAttributeBean.getOriginalConvertedQty() });
-						} else {
-							jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getItemId(), batchAttributeBean.getBatchNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufacturer(), batchAttributeBean.getMrpPrice(), destLocId, null, 0, batchAttributeBean.getOriginalConvertedQty() });
-						}
+//						if (type == 106) {//need to check the types
+//							jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getBatchItemId(), batchAttributeBean.getLotNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufactureDef(), batchAttributeBean.getMrp(), batchLocation, null, 0, batchAttributeBean.getOriginalConvertedQty() });
+//						} else {
+							jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getBatchItemId(), batchAttributeBean.getLotNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufactureDef(), batchAttributeBean.getMrp(), destLocId, null, 0, batchAttributeBean.getOriginalConvertedQty() });
+						//}
 
 					}
 
@@ -448,11 +449,11 @@ public class GRNDaoImpl implements GRNDao {
 //				srcLocId = getTransitLocation(transLoc, jdbcTemplate);
 //
 //			} else 
-			if (type == 88) {
-				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
-				if (isQc)
-					destLocId = jdbcTemplate.queryForObject(GRNQueryUtil.GET_QC_LOCATION, new Object[] { formCode }, Integer.class);
-			} 
+//			if (type == 88) {
+//				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
+//				if (isQc)
+//					destLocId = jdbcTemplate.queryForObject(GRNQueryUtil.GET_QC_LOCATION, new Object[] { formCode }, Integer.class);
+//			} 
 //				else if (type == 149) {
 //				isQc = jdbcTemplate.queryForObject(GRNQueryUtil.CHECK_QC_FOR_ITEM, new Object[] { itemId }, Boolean.class);
 //				if (isQc)
@@ -492,7 +493,7 @@ public class GRNDaoImpl implements GRNDao {
 
 						}
 
-						jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getItemId(), batchAttributeBean.getBatchNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufacturer(), batchAttributeBean.getMrpPrice(), null, destLocId, batchAttributeBean.getOriginalConvertedQty(), 0 });
+						jdbcTemplate.update(GRNQueryUtil.SAVE_STOCK_LEDGER_BATCH, new Object[] { stockId, batchAttributeBean.getBatchItemId(), batchAttributeBean.getLotNo(), batchAttributeBean.getBatchQty(), exdate, batchAttributeBean.getManufactureDef(), batchAttributeBean.getMrp(), null, destLocId, batchAttributeBean.getOriginalConvertedQty(), 0 });
 
 					}
 
@@ -585,8 +586,8 @@ public class GRNDaoImpl implements GRNDao {
 				//objGRNBean.setPoAmendNo((String) row.get("poAmendNo"));
 
 				objGRNBean.setConTransferNo((String) row.get("conTransferNo"));
-				objGRNBean.setPoRequisitionId((String) row.get("poRequisitionId"));
-				objGRNBean.setPoRequisition((String) row.get("poRequisition"));
+				objGRNBean.setPoRequisitionId( (int) row.get("poRequisitionId"));
+				objGRNBean.setPoRequisition( (String) row.get("poRequisition"));
 				objGRNBean.setVendorId((int) row.get("vendorId"));
 				objGRNBean.setVendorName((String) row.get("vendorName"));
 				objGRNBean.setDelOrderNo((String) row.get("delOrderNo"));
@@ -597,8 +598,6 @@ public class GRNDaoImpl implements GRNDao {
 				objGRNBean.setTransMode((int) row.get("transMode"));
 				objGRNBean.setLocId((int) row.get("locId"));
 				objGRNBean.setLocName((String) row.get("locName"));
-				objGRNBean.setQcLocationId((int) row.get("qcLocationId"));
-				objGRNBean.setQcLocationName((String) row.get("qcLocationName"));
 				objGRNBean.setDstLocId((int) row.get("dstLocId"));
 				objGRNBean.setDstLocName((String) row.get("dstLocName"));
 				objGRNBean.setPoType((String) row.get("poType"));
@@ -612,8 +611,8 @@ public class GRNDaoImpl implements GRNDao {
 				objGRNBean.setVendorName((String) row.get("vendorName"));
 				objGRNBean.setVendorAddress((String) row.get("address"));
 				objGRNBean.setVendorPhone((String) row.get("vendorPhone"));
-				objGRNBean.setFreight((double) row.get("grnfreight"));
-				objGRNBean.setOtherCharges((double) row.get("grnOtherCharnge"));
+//				objGRNBean.setFreight(row.get("grnfreight"));
+//				objGRNBean.setOtherCharges((double) row.get("grnOtherCharnge"));
 				objGRNBean.setPreparedBy((String) row.get("first_name"));
 
 			}

@@ -2,7 +2,7 @@ package com.bitutech.grn;
 
 public class GRNQueryUtil {
 
-	public static final String GRN_REQUISITION = "select purchase_requisition_id poRequisitionId,concat(requisition_number,'-',pr_request_number) poRequisition,to_char(requisition_date,'YYYY-MM-DD') poRequisitionDate from purchase_requisition where purchase_requisition_id in (select purchase_requisition_id from purchase_quote_detail where purchase_quote_detail_id in (select distinct podtl.purchase_quote_detail_id from purchase_order_detail podtl where podtl.purchase_order_id =?))";
+	public static final String GRN_REQUISITION = "select purchase_requisition_id as id,concat(requisition_number,'-',pr_request_number) as text,to_char(requisition_date,'YYYY-MM-DD') poRequisitionDate from purchase_requisition where purchase_requisition_id in (select purchase_requisition_id from purchase_quote_detail where purchase_quote_detail_id in (select distinct podtl.purchase_quote_detail_id from purchase_order_detail podtl where podtl.purchase_order_id =?))";
 	
 	public static final String GRN_REQ_DTL = "select po.purchase_requisition_id poId,po.requisition_number poNo ,to_char(requisition_date,'YYYY-MM-DD') poDate,pod.item_id dtlItemId, coalesce(pod.quantity,0) dtlQty,itm.item_code dtlItemCode,itm.item_name dtlItemName,itm.item_description dtlItemDesc,coalesce(itm.uom,0) dtlUom from purchase_requisition po inner join purchase_requisition_detail pod on po.purchase_requisition_id = pod.purchase_requisition_id left join item itm on pod.item_id = itm.item_id where po.purchase_requisition_id in (select distinct purchase_requisition_id from purchase_quote_detail where purchase_quote_detail_id in (select distinct podtl.purchase_quote_detail_id from purchase_order_detail podtl where podtl.purchase_order_id =?))";
 
@@ -72,7 +72,7 @@ public class GRNQueryUtil {
 	public static final String GRN_AUTO_GENERATE = "SELECT CASE WHEN MAX(grn_number) IS NULL  THEN 'GRN0001' ELSE rpad(MAX(grn_number),3,'GRN')|| lpad(cast(cast((SUBSTRING(MAX(grn_number),4)) as int)+1  as text),4,'0') END FROM grn";
 
 	public static final String SAVE_GRN_HDR = "INSERT INTO grn(grn_number, grn_date, purchase_order_id, purchase_requisition_id,entity_id, vendor_delivery_order_no, vendor_delivery_order_date, "
-			+ " vendor_invoice_no, vendor_invoice_date, delivery_method, mode_of_transport,location_id,dest_location_id,qc_location_id,company_id,invoice_due_date,description,freight ,other_charges,created_by, created_date) VALUES (?, TO_DATE(?,'DD-MM-YY'), ?, ?, ?,?, TO_DATE(?,'DD-MM-YY'), ?, TO_DATE(?,'DD-MM-YY'), ?, ?,?,?,?,?,TO_DATE(?,'DD-MM-YY'),?,?,?,?,now()) returning grn_id";
+			+ " vendor_invoice_no, vendor_invoice_date, delivery_method, mode_of_transport,location_id,dest_location_id,company_id,invoice_due_date,description,freight ,other_charges,created_by, created_on) VALUES (?, TO_DATE(?,'DD-MM-YY'), ?, ?, ?,?, TO_DATE(?,'DD-MM-YY'), ?, TO_DATE(?,'DD-MM-YY'), ?, ?,?,?,?,TO_DATE(?,'DD-MM-YY'),?,?,?,?,now()) returning grn_id";
 
 	public static final String GET_PO_CNT_IN_GRN = "select count(*) from grn where purchase_order_id = ?";
 
@@ -90,13 +90,13 @@ public class GRNQueryUtil {
 
 	public static final String CHECK_QC_FOR_ITEM = "select case when quality_check is null then false else quality_check end as qualityCheck from item_category ic inner join item it on ic.item_category_id = it.item_category where item_id = ?";
 
-	public static final String GET_QC_LOCATION ="select coalesce(qc_location_id,0) qcLocation from grn where grn_number =?";
+//	public static final String GET_QC_LOCATION ="select coalesce(qc_location_id,0) qcLocation from grn where grn_number =?";
 
 	public static final String INVENTORY_EXISTS = "select count(*)  from inventory where location_id=? and item_id=?";
 
-	public static final String GRN_LIST = "select grn_number grnCode,to_char(grn_date,'YYYY-MM-DD') grnDate,entity_name vendorName,purchase_order_no poNo,purchase_requisition_id poRequisition,g.purchase_order_id poId,coalesce(po.purchase_type ,0) as purchaseType, (select emp_name from employee where emp_id = g.created_by limit 1) as preparedBy from grn g left join entity en on g.entity_id = en.entity_id left join purchase_order po on g.purchase_order_id = po.purchase_order_id order by grn_number desc";
+	public static final String GRN_LIST = "select grn_number grnCode,to_char(grn_date,'YYYY-MM-DD') grnDate,entity_name vendorName,purchase_order_no poNo,pr.requisition_number poRequisition,g.purchase_order_id poId,coalesce(po.purchase_type ,0) as purchaseType, (select emp_name from employee where emp_id = g.created_by limit 1) as preparedBy from grn g left join entity en on g.entity_id = en.entity_id left join purchase_order po on g.purchase_order_id = po.purchase_order_id left join purchase_requisition pr using (purchase_requisition_id) order by grn_number desc";
 
-	public static final String MAX_INVENTORY = "select max(inventory_id) from inventory where location_id=? and item_id=?";
+	public static final String MAX_INVENTORY = "select max(inventory_id) from inventory where location_id=? and item_id=?" ;
 
 	public static final String GET_GRN_DTL = "select grn_id grnId, grn.grn_detail_id grnDtlId,grn.cost_center as costcenter,grn.item_id dtlItemId, "
 			+ "coalesce(grn.quantity,0) dtlQty,coalesce(grn.pending_qty,0) pendingQty,coalesce(grn.quantity,0) dtlQty, "
@@ -121,11 +121,10 @@ public class GRNQueryUtil {
 	public static final String GET_GRN_HDR = "select grn_id grnId,grn_number grnCode,coalesce(grn.company_id,'') companyId,  "
 			+ "to_char(grn_date,'YYYY-MM-DD') grnDate, grn.purchase_order_id as poId,po.purchase_order_no poNo,  "
 			+ "CASE WHEN po_amendment IS NULL THEN '' ELSE po_amendment END  as poAmendNo, "
-			+ "grn.purchase_requisition_id poRequisitionId,grn.purchase_requisition_id poRequisition, en.entity_id  vendorId, en.entity_name vendorName ,vendor_delivery_order_no delOrderNo,  "
+			+ "grn.purchase_requisition_id poRequisitionId, pr.requisition_number as poRequisition, en.entity_id  vendorId, en.entity_name vendorName ,vendor_delivery_order_no delOrderNo,  "
 			+ "to_char(vendor_delivery_order_date,'YYYY-MM-DD') delOrderDate, vendor_invoice_no invoiceNo,  "
 			+ "to_char(vendor_invoice_date,'YYYY-MM-DD') invoiceDate, grn.delivery_method deliveryMthd,  "
 			+ "mode_of_transport transMode,grn.location_id locId,loc.location_name locName,  "
-			+ "coalesce(grn.qc_location_id,0) qcLocationId,qloc.location_name qcLocationName,  "
 			+ "coalesce(grn.dest_location_id,0) dstLocId,dloc.location_name dstLocName, def.value poType,  "
 			+ "coalesce(grn_status,0) grnStatus,to_char(invoice_due_date,'YYYY-MM-DD')  as dueDate , "
 			+ "remarks_othercharges as remarksforother,COALESCE(po.freight,0) as freight,COALESCE(po.other_charges,0) as otherCharges, "
@@ -137,11 +136,10 @@ public class GRNQueryUtil {
 			+ " as address  , (select contact_mobile from entity where entity_id=grn.entity_id) as vendorPhone,   "
 			+ " (select emp_name from employee where emp_id = grn.created_by ), "
 			+ " COALESCE(grn.freight,0) as grnfreight ,COALESCE(grn.other_charges,0) as grnOtherCharnge from grn grn  "
-			+ "inner join purchase_order po on po.purchase_order_id = grn.purchase_order_id  "
+			+ "inner join purchase_order po on po.purchase_order_id = grn.purchase_order_id  left join purchase_requisition pr using (purchase_requisition_id) "
 			+ "inner join location loc on loc.location_id = grn.location_id "
-			+ "inner join location dloc on dloc.location_id = grn.dest_location_id  left "
-			+ "join location qloc on qloc.location_id = grn.qc_location_id  "
-			+ "left join def_table def on def.def_table_id = po.purchase_type  "
+			+ "inner join location dloc on dloc.location_id = grn.dest_location_id "
+			+ " left join def_table def on def.def_table_id = po.purchase_type  "
 			+ "inner join entity en on grn.entity_id = en.entity_id "
 			+ "inner join company c on c.company_code = grn.company_id  where grn.grn_number = ?";
 
@@ -155,9 +153,13 @@ public class GRNQueryUtil {
 
 	public static final String GET_GRN_BATCH_DTL = "select grn.item_id batchItemId ,itm.item_code as batchItemCode,itm.item_name batchItemName,grn.batch_no lotNo,grn.batch_qty batchQty,to_char(grn.expiry_date,'YYYY-MM-DD') expiryDate,grn.manufacturer manufactureDef,grn.mrp_price mrp,grnd.qc_status status from grn_batch_detail grn left join item itm on grn.item_id = itm.item_id left join grn_detail grnd on grnd.grn_detail_id = grn.grn_detail_id where grn.grn_detail_id =?";
 
-	public static String SAVE_STOCK_LEDGER_BATCH = "INSERT INTO stock_ledger_detail(stock_ledger_id, item_id, batch_no, batch_qty, expiry_date, manufacturer, mrp_price, source_location,destination_location,destination_qty,source_qty) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String DELETE_GRN_BATCH_DTL = "delete from grn_batch_detail where grn_detail_id = ?";
 
-	public static String SAVE_STOCK_LEDGER_NEW = "INSERT INTO stock_ledger( inventory_id, source_location, destination_location, source_qty, destination_qty, doc_date,doc_type,doc_ref) VALUES( ?, ?, ?,?,?,TO_DATE(?,'DD-MM-YY'),?,?) returning stock_ledger_id";
+	public static final String COUNT_GRN_BATCH_DTL = "select count(*) from grn_batch_detail where grn_detail_id = ?";
+
+	public static String SAVE_STOCK_LEDGER_BATCH = "INSERT INTO stock_ledger_detail(stock_ledger_id, item_id, batch_no, batch_qty, expiry_date, manufacturer, mrp_price, source_location_id,destination_location_id,destination_qty,source_qty) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+
+	public static String SAVE_STOCK_LEDGER_NEW = "INSERT INTO stock_ledger( inventory_id, source_location_id, destination_location_id, source_qty, destination_qty, doc_date,doc_type,doc_ref) VALUES( ?, ?, ?,?,?,TO_DATE(?,'DD-MM-YY'),?,?) returning stock_ledger_id";
 
 	public static String SAVE_INVENTORY = "INSERT INTO inventory( inventory_date, location_id, item_id,quantity_available) VALUES( TO_DATE(?,'DD-MM-YY'), ?, ?, ?)";
 
