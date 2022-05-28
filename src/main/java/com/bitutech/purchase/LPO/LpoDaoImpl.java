@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bitutech.core.util.DropDownList;
 
 @Repository
 public class LpoDaoImpl implements LpoDao {
@@ -29,13 +31,13 @@ public class LpoDaoImpl implements LpoDao {
 			
 		      lopMap.put("purchaseReqNo", bean.getPurchaseReqNo());
 			lopMap.put("organizationName", bean.getOrganizationName());
-			lopMap.put("poNumber", bean.getPoNumber());
+			lopMap.put("poNo", bean.getPoNo());
 			lopMap.put("requestType", bean.getRequestType());
 			lopMap.put("poDate", bean.getPoDate());
 			lopMap.put("woType", bean.getWoType());
 			lopMap.put("purchaseType", bean.getPurchaseType());
 			lopMap.put("purchaseFor", bean.getPurchaseFor());
-			lopMap.put("vendor", bean.getVendor());
+			lopMap.put("vendorId", bean.getVendorId());
 			lopMap.put("destinationLocation", bean.getDestinationLocation());
 			lopMap.put("advance", bean.getAdvance());
 			lopMap.put("currency", bean.getCurrency());
@@ -53,69 +55,61 @@ public class LpoDaoImpl implements LpoDao {
 			lopMap.put("destinationState", bean.getDestinationState());
 			lopMap.put("destinationZip", bean.getDestinationZip());
 			lopMap.put("destinationCountry", bean.getDestinationCountry()); 
-			  
-			Integer purchaseReqNo = namedParameterJdbcTemplate.queryForObject(LpoQueryUtil.INSERT_LPO_HDR,lopMap,Integer.class);
+			lopMap.put("subTotal", bean.getSubTotal());	    		
+	   		 lopMap.put("discount", bean.getDiscount());
+	   		 lopMap.put("cgst", bean.getCgst());
+	   		 lopMap.put("sgst", bean.getSgst());
+	   		 lopMap.put("igst", bean.getIgst());
+	   		 lopMap.put("freight", bean.getFreight());
+	   		 lopMap.put("freightTaxPercent", bean.getFreightTaxPercent());
+	   		 lopMap.put("freightTotal", bean.getFreightTotal());
+	   		 lopMap.put("otherCharges", bean.getOtherCharges());
+	   		 lopMap.put("remarksOtherCharges", bean.getRemarksOtherCharges());
+			 lopMap.put("total",bean.getTotal());
+				  
+			//	namedParameterJdbcTemplate.update(LpoQueryUtil.INSERT_LPO_HDR,lopMap);
 
-			  if(purchaseReqNo != null) {
+			  
+			Integer purchaseOrderId = namedParameterJdbcTemplate.queryForObject(LpoQueryUtil.INSERT_LPO_HDR,lopMap,Integer.class);
+
+			  if(purchaseOrderId != null) {
 					 
-				     if(bean.getLpoDetailBeanOne().size()>0) {
+				     if(bean.getLpoDtlBeanOne().size()>0) {
 				             
-				    	 for(LpoDetailBeanOne lpoDetailBeanOne: bean.getLpoDetailBeanOne() )
+				    	 for(LpoDtlBeanOne lpoDtlBeanOne: bean.getLpoDtlBeanOne() )
 		    {
 				    		 Map<String, Object> lpoDtlOneMap = new HashMap<String, Object>();
-			lpoDtlOneMap.put("purchaseReqNo", lpoDetailBeanOne.getPurchaseReqNo());	    		
-			lpoDtlOneMap.put("itemCodeItemName", lpoDetailBeanOne.getItemCodeItemName());
-			lpoDtlOneMap.put("itemDescription", lpoDetailBeanOne.getItemDescription());
-			lpoDtlOneMap.put("edd", lpoDetailBeanOne.getEdd());
-			lpoDtlOneMap.put("purchaseUOM", lpoDetailBeanOne.getPurchaseUOM());
-			lpoDtlOneMap.put("purchaseQty", lpoDetailBeanOne.getPurchaseQty());
-			lpoDtlOneMap.put("vendorUOM", lpoDetailBeanOne.getVendorUOM());
-			lpoDtlOneMap.put("vendorQty", lpoDetailBeanOne.getVendorQty());
-			lpoDtlOneMap.put("availableQty", lpoDetailBeanOne.getAvailableQty());
-			lpoDtlOneMap.put("unitPrice", lpoDetailBeanOne.getNetPrice());
-			lpoDtlOneMap.put("oldUnitPrice",lpoDetailBeanOne.getOldUnitPrice());
-			lpoDtlOneMap.put("price", lpoDetailBeanOne.getPrice());
-			lpoDtlOneMap.put("discountType", lpoDetailBeanOne.getDiscountType());
-			lpoDtlOneMap.put("discountPercent", lpoDetailBeanOne.getDiscountPercent());
-			lpoDtlOneMap.put("netPrice", lpoDetailBeanOne.getNetPrice());
-			lpoDtlOneMap.put("cgst", lpoDetailBeanOne.getCgst());
-			lpoDtlOneMap.put("sgst", lpoDetailBeanOne.getSgst());
-			lpoDtlOneMap.put("igst", lpoDetailBeanOne.getIgst());
-			lpoDtlOneMap.put("cgstPercent", lpoDetailBeanOne.getCgstPercent());
-			lpoDtlOneMap.put("sgstPercent", lpoDetailBeanOne.getSgstPercent());
-			lpoDtlOneMap.put("igstPercent", lpoDetailBeanOne.getIgstPercent());
-			lpoDtlOneMap.put("total", lpoDetailBeanOne.getTotal());
+				    		 		
+			lpoDtlOneMap.put("purchaseOrderId",purchaseOrderId);	 
+			lpoDtlOneMap.put("requisitionNo", lpoDtlBeanOne.getRequisitionNo());	    		
+			lpoDtlOneMap.put("itemId", lpoDtlBeanOne.getItemId());
+			lpoDtlOneMap.put("itemDescription", lpoDtlBeanOne.getItemDescription());
+			lpoDtlOneMap.put("edd", lpoDtlBeanOne.getEdd());
+			lpoDtlOneMap.put("purchaseUOM", lpoDtlBeanOne.getPurchaseUOM());
+			lpoDtlOneMap.put("purchaseQty", lpoDtlBeanOne.getPurchaseQty());
+			lpoDtlOneMap.put("vendorUOM", lpoDtlBeanOne.getVendorUOM());
+			lpoDtlOneMap.put("vendorQty", lpoDtlBeanOne.getVendorQty());
+			lpoDtlOneMap.put("availableQty", lpoDtlBeanOne.getAvailableQty());
+			lpoDtlOneMap.put("unitPrice", lpoDtlBeanOne.getNetPrice());
+			lpoDtlOneMap.put("oldUnitPrice",lpoDtlBeanOne.getOldUnitPrice());
+			lpoDtlOneMap.put("price", lpoDtlBeanOne.getPrice());
+			lpoDtlOneMap.put("discount", lpoDtlBeanOne.getDiscount());
+			lpoDtlOneMap.put("discountType", lpoDtlBeanOne.getDiscountType());
+			lpoDtlOneMap.put("discountPercent", lpoDtlBeanOne.getDiscountPercent());
+			lpoDtlOneMap.put("netPrice", lpoDtlBeanOne.getNetPrice());
+			lpoDtlOneMap.put("taxCGST", lpoDtlBeanOne.getTaxCGST());
+			lpoDtlOneMap.put("taxSGST", lpoDtlBeanOne.getTaxSGST());
+			lpoDtlOneMap.put("taxIGST", lpoDtlBeanOne.getTaxIGST());
+			lpoDtlOneMap.put("taxCGSTinPercent", lpoDtlBeanOne.getTaxCGSTinPercent());
+			lpoDtlOneMap.put("taxSGSTinPercent", lpoDtlBeanOne.getTaxSGSTinPercent());
+			lpoDtlOneMap.put("taxIGSTinPercent", lpoDtlBeanOne.getTaxIGSTinPercent());
+			lpoDtlOneMap.put("finalTotal", lpoDtlBeanOne.getFinalTotal());
 
 			  namedParameterJdbcTemplate.update(LpoQueryUtil.INSERT_LPO_DTL_ONE,lpoDtlOneMap);
 			  
 			         }
 			      }
 			     }
-			  if(purchaseReqNo != null) {
-					 
-				     if(bean.getLpoDetailBeanOne().size()>0) {
-				             
-				    	 for(LpoDetailBeanTwo lpoDetailBeanOne: bean.getLpoDetailBeanTwo() )
-		    {Map<String, Object> lpoDtlTwoMap = new HashMap<String, Object>();
-   		 lpoDtlTwoMap.put("subTotal", lpoDetailBeanOne.getSubTotal());	    		
-   		 lpoDtlTwoMap.put("discount", lpoDetailBeanOne.getDiscount());
-   		 lpoDtlTwoMap.put("cgst", lpoDetailBeanOne.getCgst());
-   		 lpoDtlTwoMap.put("sgst", lpoDetailBeanOne.getSgst());
-   		 lpoDtlTwoMap.put("iGST", lpoDetailBeanOne.getiGST());
-   		 lpoDtlTwoMap.put("freight", lpoDetailBeanOne.getFreight());
-   		 lpoDtlTwoMap.put("freightTaxPercent", lpoDetailBeanOne.getFreightTaxPercent());
-   		 lpoDtlTwoMap.put("freightTotal", lpoDetailBeanOne.getFreightTotal());
-   		 lpoDtlTwoMap.put("otherCharges", lpoDetailBeanOne.getOtherCharges());
-   		 lpoDtlTwoMap.put("remarks", lpoDetailBeanOne.getRemarks());
-			lpoDtlTwoMap.put("total",lpoDetailBeanOne.getTotal());
-			
-
-			  namedParameterJdbcTemplate.update(LpoQueryUtil.INSERT_LPO_DTL_TWO,lpoDtlTwoMap);
-			  
-			         }
-			      }
-			     }
-			
 			
 			resultBean.setSuccess(true);
 		}catch(Exception e){
@@ -126,14 +120,24 @@ public class LpoDaoImpl implements LpoDao {
 		return resultBean;
 		
 	}
+	//po no
+	@Override
+	public LpoResultBean getPoNo() throws Exception {
+		// TODO Auto-generated method stub
+		LpoResultBean resultBean = new LpoResultBean();
+		String PoNo = jdbcTemplate.queryForObject(LpoQueryUtil.GET_PO_NO,String.class);
+		resultBean.setPoNo(PoNo);
+		return resultBean;
+	}
 
 	@Override
-	public List<LpoBean> getList() throws Exception {
+	public List<LpoBean> getAllList() throws Exception {
 		// TODO Auto-generated method stub
+		LpoResultBean resultBean = new LpoResultBean();
 		List<LpoBean> salesCallEntryBeanList = new ArrayList<LpoBean>();
 		try {
 			salesCallEntryBeanList = jdbcTemplate.query(LpoQueryUtil.getList, new BeanPropertyRowMapper<LpoBean>(LpoBean.class));
-			
+			resultBean.setLpoDetails(salesCallEntryBeanList);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -147,10 +151,8 @@ public class LpoDaoImpl implements LpoDao {
 		try {
 			resultBean.setLpoBean(jdbcTemplate.queryForObject(LpoQueryUtil.SELECT_LPO_HDR,new Object[] { bean }, new BeanPropertyRowMapper<LpoBean>(LpoBean.class)));
 			
-			List<LpoDetailBeanOne> lpoDetailBeanOne = jdbcTemplate.query(LpoQueryUtil.SELECT_LPO_DTL_ONE,new Object[] { bean },new BeanPropertyRowMapper<LpoDetailBeanOne>(LpoDetailBeanOne.class));	
-			  resultBean.setLpoDetailBeanOne(lpoDetailBeanOne);		
-			List<LpoDetailBeanTwo> lpoDetailBeanTwo = jdbcTemplate.query(LpoQueryUtil.SELECT_LPO_DTL_TWO,new Object[] { bean },new BeanPropertyRowMapper<LpoDetailBeanTwo>(LpoDetailBeanTwo.class));	
-			  resultBean.setLpoDetailBeanTwo(lpoDetailBeanTwo);		
+			List<LpoDtlBeanOne> lpoDtlBeanOne = jdbcTemplate.query(LpoQueryUtil.SELECT_LPO_DTL_ONE,new Object[] { bean },new BeanPropertyRowMapper<LpoDtlBeanOne>(LpoDtlBeanOne.class));	
+			  resultBean.setLpoDtlBeanOne(lpoDtlBeanOne);		
 			  resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
@@ -166,15 +168,16 @@ public class LpoDaoImpl implements LpoDao {
 		try {
 			Map<String, Object> lopMap = new HashMap<String, Object>();
 			
+			lopMap.put("purchaseOrderId", bean.getPurchaseOrderId());
 			lopMap.put("purchaseReqNo", bean.getPurchaseReqNo());
 			lopMap.put("organizationName", bean.getOrganizationName());
-			lopMap.put("poNumber", bean.getPoNumber());
+			lopMap.put("poNo", bean.getPoNo());
 			lopMap.put("requestType", bean.getRequestType());
 			lopMap.put("poDate", bean.getPoDate());
 			lopMap.put("woType", bean.getWoType());
 			lopMap.put("purchaseType", bean.getPurchaseType());
 			lopMap.put("purchaseFor", bean.getPurchaseFor());
-			lopMap.put("vendor", bean.getVendor());
+			lopMap.put("vendorId", bean.getVendorId());
 			lopMap.put("destinationLocation", bean.getDestinationLocation());
 			lopMap.put("advance", bean.getAdvance());
 			lopMap.put("currency", bean.getCurrency());
@@ -192,72 +195,57 @@ public class LpoDaoImpl implements LpoDao {
 			lopMap.put("destinationState", bean.getDestinationState());
 			lopMap.put("destinationZip", bean.getDestinationZip());
 			lopMap.put("destinationCountry", bean.getDestinationCountry()); 
-			  
+			lopMap.put("subTotal", bean.getSubTotal());	    		
+	   		 lopMap.put("discount", bean.getDiscount());
+	   		 lopMap.put("cgst", bean.getCgst());
+	   		 lopMap.put("sgst", bean.getSgst());
+	   		 lopMap.put("igst", bean.getIgst());
+	   		 lopMap.put("freight", bean.getFreight());
+	   		 lopMap.put("freightTaxPercent", bean.getFreightTaxPercent());
+	   		 lopMap.put("freightTotal", bean.getFreightTotal());
+	   		 lopMap.put("otherCharges", bean.getOtherCharges());
+	   		 lopMap.put("remarksOtherCharges", bean.getRemarksOtherCharges());
+				lopMap.put("total",bean.getTotal());
 
 			namedParameterJdbcTemplate.update(LpoQueryUtil.UPDATE_LPO_HDR,lopMap);
 			
-			if(bean.getLpoDetailBeanOne().size()>0) {
-					 
-				  jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_ONE,bean.getPurchaseReqNo());
+			if(bean.getLpoDtlBeanOne().size()>0) {
+				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_ONE,bean.getPurchaseOrderId());	 
 				
-
-			    	for(LpoDetailBeanOne lpoDetailBeanOne: bean.getLpoDetailBeanOne() ){
+			    	for(LpoDtlBeanOne lpoDtlBeanOne: bean.getLpoDtlBeanOne() ){
 			    	
 				    		 Map<String, Object> lpoDtlOneMap = new HashMap<String, Object>();
-				    		 lpoDtlOneMap.put("purchaseReqNo", lpoDetailBeanOne.getPurchaseReqNo());	    		
-				 			lpoDtlOneMap.put("itemCodeItemName", lpoDetailBeanOne.getItemCodeItemName());
-				 			lpoDtlOneMap.put("itemDescription", lpoDetailBeanOne.getItemDescription());
-				 			lpoDtlOneMap.put("edd", lpoDetailBeanOne.getEdd());
-				 			lpoDtlOneMap.put("purchaseUOM", lpoDetailBeanOne.getPurchaseUOM());
-				 			lpoDtlOneMap.put("purchaseQty", lpoDetailBeanOne.getPurchaseQty());
-				 			lpoDtlOneMap.put("vendorUOM", lpoDetailBeanOne.getVendorUOM());
-				 			lpoDtlOneMap.put("vendorQty", lpoDetailBeanOne.getVendorQty());
-				 			lpoDtlOneMap.put("availableQty", lpoDetailBeanOne.getAvailableQty());
-				 			lpoDtlOneMap.put("unitPrice", lpoDetailBeanOne.getNetPrice());
-				 			lpoDtlOneMap.put("oldUnitPrice",lpoDetailBeanOne.getOldUnitPrice());
-				 			lpoDtlOneMap.put("price", lpoDetailBeanOne.getPrice());
-				 			lpoDtlOneMap.put("discountType", lpoDetailBeanOne.getDiscountType());
-				 			lpoDtlOneMap.put("discountPercent", lpoDetailBeanOne.getDiscountPercent());
-				 			lpoDtlOneMap.put("netPrice", lpoDetailBeanOne.getNetPrice());
-				 			lpoDtlOneMap.put("cgst", lpoDetailBeanOne.getCgst());
-				 			lpoDtlOneMap.put("sgst", lpoDetailBeanOne.getSgst());
-				 			lpoDtlOneMap.put("igst", lpoDetailBeanOne.getIgst());
-				 			lpoDtlOneMap.put("cgstPercent", lpoDetailBeanOne.getCgstPercent());
-				 			lpoDtlOneMap.put("sgstPercent", lpoDetailBeanOne.getSgstPercent());
-				 			lpoDtlOneMap.put("igstPercent", lpoDetailBeanOne.getIgstPercent());
-				 			lpoDtlOneMap.put("total", lpoDetailBeanOne.getTotal());
+				    		 lpoDtlOneMap.put("requisitionNo", lpoDtlBeanOne.getPurchaseOrderId());	 
+				    		 lpoDtlOneMap.put("requisitionNo", lpoDtlBeanOne.getRequisitionNo());	    		
+				    		 lpoDtlOneMap.put("itemId", lpoDtlBeanOne.getItemId());
+				 			lpoDtlOneMap.put("itemDescription", lpoDtlBeanOne.getItemDescription());
+				 			lpoDtlOneMap.put("edd", lpoDtlBeanOne.getEdd());
+				 			lpoDtlOneMap.put("purchaseUOM", lpoDtlBeanOne.getPurchaseUOM());
+				 			lpoDtlOneMap.put("purchaseQty", lpoDtlBeanOne.getPurchaseQty());
+				 			lpoDtlOneMap.put("vendorUOM", lpoDtlBeanOne.getVendorUOM());
+				 			lpoDtlOneMap.put("vendorQty", lpoDtlBeanOne.getVendorQty());
+				 			lpoDtlOneMap.put("availableQty", lpoDtlBeanOne.getAvailableQty());
+				 			lpoDtlOneMap.put("unitPrice", lpoDtlBeanOne.getNetPrice());
+				 			lpoDtlOneMap.put("oldUnitPrice",lpoDtlBeanOne.getOldUnitPrice());
+				 			lpoDtlOneMap.put("price", lpoDtlBeanOne.getPrice());
+				 			lpoDtlOneMap.put("discount", lpoDtlBeanOne.getDiscount());
+				 			lpoDtlOneMap.put("discountType", lpoDtlBeanOne.getDiscountType());
+				 			lpoDtlOneMap.put("discountPercent", lpoDtlBeanOne.getDiscountPercent());
+				 			lpoDtlOneMap.put("netPrice", lpoDtlBeanOne.getNetPrice());
+				 			lpoDtlOneMap.put("taxCGST", lpoDtlBeanOne.getTaxCGST());
+							lpoDtlOneMap.put("taxSGST", lpoDtlBeanOne.getTaxSGST());
+							lpoDtlOneMap.put("taxIGST", lpoDtlBeanOne.getTaxIGST());
+							lpoDtlOneMap.put("taxCGSTinPercent", lpoDtlBeanOne.getTaxCGSTinPercent());
+							lpoDtlOneMap.put("taxSGSTinPercent", lpoDtlBeanOne.getTaxSGSTinPercent());
+							lpoDtlOneMap.put("taxIGSTinPercent", lpoDtlBeanOne.getTaxIGSTinPercent());
+							lpoDtlOneMap.put("finalTotal", lpoDtlBeanOne.getFinalTotal());
 
 				  
 							  namedParameterJdbcTemplate.update(LpoQueryUtil.INSERT_LPO_DTL_ONE,lpoDtlOneMap);
 			    } 
 			    
 			    }
-			if(bean.getLpoDetailBeanTwo().size() > 0) {
-				 
-				  jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_TWO,bean.getPurchaseReqNo());
-				
 
-			    	for(LpoDetailBeanTwo lpoDetailBeanTwo: bean.getLpoDetailBeanTwo()){
-		
-				    		 Map<String, Object> lpoDtlTwoMap = new HashMap<String, Object>();
-				    		 lpoDtlTwoMap.put("subTotal", lpoDetailBeanTwo.getSubTotal());	    		
-				    		 lpoDtlTwoMap.put("discount", lpoDetailBeanTwo.getDiscount());
-				    		 lpoDtlTwoMap.put("cgst", lpoDetailBeanTwo.getCgst());
-				    		 lpoDtlTwoMap.put("sgst", lpoDetailBeanTwo.getSgst());
-				    		 lpoDtlTwoMap.put("iGST", lpoDetailBeanTwo.getiGST());
-				    		 lpoDtlTwoMap.put("freight", lpoDetailBeanTwo.getFreight());
-				    		 lpoDtlTwoMap.put("freightTaxPercent", lpoDetailBeanTwo.getFreightTaxPercent());
-				    		 lpoDtlTwoMap.put("freightTotal", lpoDetailBeanTwo.getFreightTotal());
-				    		 lpoDtlTwoMap.put("otherCharges", lpoDetailBeanTwo.getOtherCharges());
-				    		 lpoDtlTwoMap.put("remarks", lpoDetailBeanTwo.getRemarks());
-				 			lpoDtlTwoMap.put("total",lpoDetailBeanTwo.getTotal());
-				 			
-				 			
-				  
-							  namedParameterJdbcTemplate.update(LpoQueryUtil.INSERT_LPO_DTL_TWO,lpoDtlTwoMap);
-			    } 
-			    
-			    }
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e){
@@ -269,14 +257,14 @@ public class LpoDaoImpl implements LpoDao {
 	}
 
 	@Override
-	public LpoResultBean delete(Integer salesCallHdrId) throws Exception {
+	public LpoResultBean delete(Integer purchaseOrderId) throws Exception {
 		LpoResultBean resultBean = new LpoResultBean();
 		resultBean.setSuccess(false);
 		try {
-			if(salesCallHdrId!=null) {
-				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_HDR,salesCallHdrId);
-				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_ONE,salesCallHdrId);
-				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_TWO,salesCallHdrId);
+			if(purchaseOrderId!=null) {
+				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_HDR,purchaseOrderId);
+				jdbcTemplate.update(LpoQueryUtil.DELETE_LPO_DTL_ONE,purchaseOrderId);
+				//jdbcTemplate.update(LpoQueryUtil.DELETE_GRN_DTL,purchaseOrderId);
 			}
 			resultBean.setSuccess(true);
 		}
@@ -285,6 +273,50 @@ public class LpoDaoImpl implements LpoDao {
 			resultBean.setSuccess(false);
 		}
 		return resultBean;
+	}
+	//po no list
+	@Override
+	public LpoResultBean getPoNoList() throws Exception {
+		// TODO Auto-generated method stub
+		List<DropDownList> poNoList = new ArrayList<>();
+		LpoResultBean resultBean = new LpoResultBean();
+		try {
+			poNoList = jdbcTemplate.query(LpoQueryUtil.GET_PO_NO_LIST,new BeanPropertyRowMapper<DropDownList>(DropDownList.class));
+			resultBean.setPoNoList(poNoList);
+			resultBean.setSuccess(true);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+		}
+		return resultBean;
+	}
+
+	@Override
+	public LpoResultBean getVendorAddress(int vendorId) {
+		// TODO Auto-generated method stub
+		LpoResultBean bean = new LpoResultBean();
+		try {
+			List<LpoBean> lPoGrnBean = jdbcTemplate.query(LpoQueryUtil.GET_VENDOR_ADDRESS, new Object[] { vendorId }, new BeanPropertyRowMapper<>(LpoBean.class));
+			bean.setlVendorAddressDtl(lPoGrnBean);
+			//getPOListForVendor(vendorId, bean, jdbcTemplate);
+		} catch (DataAccessException e) {
+			//LOGGER.error("Error in List", e);
+		}
+		return bean;
+	}
+	@Override
+	public LpoResultBean getRequisition(String requisitionNo) {
+		// TODO Auto-generated method stub
+		LpoResultBean bean = new LpoResultBean();
+		try {
+			List<LpoDtlBeanOne> lPoGrnBean = jdbcTemplate.query(LpoQueryUtil.REQUISITION, new Object[] { requisitionNo }, new BeanPropertyRowMapper<>(LpoDtlBeanOne.class));
+			bean.setlRequisitionList(lPoGrnBean);
+			//bean.setlRequisitionDtl(getRequisitionList(requisitionNo));
+		} catch (DataAccessException e) {
+			//LOGGER.error("Error in List", e);
+		}
+		return bean;
 	}
 
 }

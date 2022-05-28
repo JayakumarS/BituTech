@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.bitutech.core.util.BasicResultBean;
+import com.bitutech.core.util.DropDownList;
 
 
 public class LpoResultBean extends BasicResultBean implements Serializable {
@@ -12,10 +13,55 @@ public class LpoResultBean extends BasicResultBean implements Serializable {
 	public boolean success;
 
 	public List<LpoBean> lpoDetails;
-	private List<LpoDetailBeanOne> LpoDetailBeanOne;
-	private List<LpoDetailBeanTwo> LpoDetailBeanTwo;
+	private List<LpoDtlBeanOne> lpoDtlBeanOne;
+	private List<LpoDetailBeanTwo> lpoDetailBeanTwo;
 	private LpoBean lpoBean;
+	private String poNo;
+	private List<DropDownList> poNoList;
+	private List<LpoBean> lVendorAddressDtl;
+	private List<LpoDtlBeanOne> lRequisitionDtl;
+	private List<LpoDtlBeanOne> lRequisitionList;
 	
+	public List<LpoDtlBeanOne> getlRequisitionList() {
+		return lRequisitionList;
+	}
+
+	public void setlRequisitionList(List<LpoDtlBeanOne> lRequisitionList) {
+		this.lRequisitionList = lRequisitionList;
+	}
+
+	public List<LpoBean> getlVendorAddressDtl() {
+		return lVendorAddressDtl;
+	}
+
+	public List<LpoDtlBeanOne> getlRequisitionDtl() {
+		return lRequisitionDtl;
+	}
+
+	public void setlRequisitionDtl(List<LpoDtlBeanOne> lRequisitionDtl) {
+		this.lRequisitionDtl = lRequisitionDtl;
+	}
+
+	public void setlVendorAddressDtl(List<LpoBean> lVendorAddressDtl) {
+		this.lVendorAddressDtl = lVendorAddressDtl;
+	}
+
+	public List<DropDownList> getPoNoList() {
+		return poNoList;
+	}
+
+	public void setPoNoList(List<DropDownList> poNoList) {
+		this.poNoList = poNoList;
+	}
+
+	public String getPoNo() {
+		return poNo;
+	}
+
+	public void setPoNo(String poNo) {
+		this.poNo = poNo;
+	}
+
 	public List<LpoBean> getLpoDetails() {
 		return lpoDetails;
 	}
@@ -39,19 +85,24 @@ public class LpoResultBean extends BasicResultBean implements Serializable {
 	public void setLpoBean(LpoBean lpoBean) {
 		this.lpoBean = lpoBean;
 	}
-	public List<LpoDetailBeanOne> getLpoDetailBeanOne() {
-		return LpoDetailBeanOne;
+
+	public List<LpoDtlBeanOne> getLpoDtlBeanOne() {
+		return lpoDtlBeanOne;
 	}
 
-	public void setLpoDetailBeanOne(List<LpoDetailBeanOne> lpoDetailBeanOne) {
-		LpoDetailBeanOne = lpoDetailBeanOne;
-	}
 	public List<LpoDetailBeanTwo> getLpoDetailBeanTwo() {
-		return LpoDetailBeanTwo;
+		return lpoDetailBeanTwo;
+	}
+
+	public void setLpoDtlBeanOne(List<LpoDtlBeanOne> lpoDtlBeanOne) {
+		this.lpoDtlBeanOne = lpoDtlBeanOne;
 	}
 
 	public void setLpoDetailBeanTwo(List<LpoDetailBeanTwo> lpoDetailBeanTwo) {
-		LpoDetailBeanTwo = lpoDetailBeanTwo;
+		this.lpoDetailBeanTwo = lpoDetailBeanTwo;
 	}
+
+	
+	
 
 }
