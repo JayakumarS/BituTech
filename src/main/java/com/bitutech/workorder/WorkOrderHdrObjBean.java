@@ -1,6 +1,5 @@
 package com.bitutech.workorder;
 
-import java.util.Date;
 import java.util.List;
 
 public class WorkOrderHdrObjBean {
@@ -10,6 +9,7 @@ public class WorkOrderHdrObjBean {
 	private String salesOrderNo;
 	private String uom;
 	private String remarks;
+	private List<WorkOrderDtlBean> workOrderDtlData;
 	
 	public String getUom() {
 		return uom;
@@ -23,18 +23,12 @@ public class WorkOrderHdrObjBean {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	private List<WorkOrderDtlBean> workOrderDtlData;
-	
-	
-	
 	public String getSalesOrderNo() {
 		return salesOrderNo;
 	}
 	public void setSalesOrderNo(String salesOrderNo) {
 		this.salesOrderNo = salesOrderNo;
 	}
-	
-	
 	public String getWorkorderNo() {
 		return workorderNo;
 	}
