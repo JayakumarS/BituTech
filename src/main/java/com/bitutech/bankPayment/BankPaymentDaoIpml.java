@@ -38,7 +38,10 @@ import com.bitutech.core.util.DropDownList;
 				
 //				BankPaymentMap.put("chequeDate", bean.getChequeDate());
 				BankPaymentMap.put("currency", bean.getCurrency());
+				BankPaymentMap.put("budgetAmt", bean.getBudgetAmt());
+	 			BankPaymentMap.put("utilizedAmt", bean.getUtilizedAmt());
 //				//BankPaymentMap.put("modifiedBy","E0001");
+				
 //	 			BankPaymentMap.put("project", bean.getProject());
 //	 			BankPaymentMap.put("totalAmt", bean.getTotalAmt());
 				
@@ -53,9 +56,11 @@ import com.bitutech.core.util.DropDownList;
 							dtlMap.put("currency",BankPaymentDetailBean.getCurrency());
 							dtlMap.put("subAccountCode",BankPaymentDetailBean.getSubAccountCode());
 							dtlMap.put("shortDetails",BankPaymentDetailBean.getShortDetails());
-//							dtlMap.put("amount",BankPaymentDetailBean.getAmount());
-//							dtlMap.put("createdBy","E0001");
-							
+							dtlMap.put("amount",BankPaymentDetailBean.getAmount());
+						    dtlMap.put("budgetAmt",BankPaymentDetailBean.getBudgetAmt());
+
+							dtlMap.put("utilizedAmt",BankPaymentDetailBean.getUtilizedAmt());
+							dtlMap.put("subGroupCode",BankPaymentDetailBean.getSubAccountCode());
 							namedParameterJdbcTemplate.update(BankPaymentQueryUtil.INSERT__BANK_PAYMENT_Dtl,dtlMap);
 					
 						}
@@ -161,8 +166,8 @@ import com.bitutech.core.util.DropDownList;
 			try {
 				if(voucherNo!=null) {
 					 
-					jdbcTemplate.update(BankPaymentQueryUtil.DELETE_BANK_PAYMENT,voucherNo);
-					//jdbcTemplate.update(BankPaymentQueryUtil.DELETE_SALES_ORDER_HDR,countValue);
+					jdbcTemplate.update(BankPaymentQueryUtil.DELETE_BANK_PAYMENT_HDR,voucherNo);
+					jdbcTemplate.update(BankPaymentQueryUtil.DELETE_BANK_PAYMENT_DTL,voucherNo);
 				}
 				resultBean.setSuccess(true);
 			}

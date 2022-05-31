@@ -17,7 +17,21 @@ public class BankPaymentBean {
 	private String costcenter;
 	private String project;
 	private String totalAmt;
+	private Double budgetAmt;
+	private Double utilizedAmt;
 	
+	public Double getBudgetAmt() {
+		return budgetAmt;
+	}
+	public Double getUtilizedAmt() {
+		return utilizedAmt;
+	}
+	public void setBudgetAmt(Double budgetAmt) {
+		this.budgetAmt = budgetAmt;
+	}
+	public void setUtilizedAmt(Double utilizedAmt) {
+		this.utilizedAmt = utilizedAmt;
+	}
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}

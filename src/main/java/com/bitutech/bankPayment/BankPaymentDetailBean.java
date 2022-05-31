@@ -6,8 +6,35 @@ public class BankPaymentDetailBean {
 	private String subAccountCode;
 	private String currency;
 	private Double amount;
-    
-   private String shortDetails;
+	private Double budgetAmt;
+	private Double utilizedAmt;
+	private String subGroupCode;
+	
+   public Double getBudgetAmt() {
+		return budgetAmt;
+	}
+
+	public Double getUtilizedAmt() {
+		return utilizedAmt;
+	}
+
+	public void setBudgetAmt(Double budgetAmt) {
+		this.budgetAmt = budgetAmt;
+	}
+
+	public void setUtilizedAmt(Double utilizedAmt) {
+		this.utilizedAmt = utilizedAmt;
+	}
+
+public String getSubGroupCode() {
+		return subGroupCode;
+	}
+
+	public void setSubGroupCode(String subGroupCode) {
+		this.subGroupCode = subGroupCode;
+	}
+
+private String shortDetails;
 
 public String getVoucherNo() {
 	return voucherNo;
