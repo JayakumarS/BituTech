@@ -63,7 +63,7 @@ public class CreditNoteDaoImpl implements CreditNoteDao {
 		      }
 		     }
 			 
-			resultBean.setSuccess(false);
+			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

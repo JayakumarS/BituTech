@@ -25,7 +25,6 @@ public class WorkOrderQueryUtil {
 
 	public static final String DELETE_BOM_DTL = "delete from bom_dtl WHERE workorder_no = ?";
 
-	.
 	public static final String SELECT_WORKORDER_DTL = "select workorder_no as workOrderNo,item_id as itemId,quantity as quantity,uom_id as uomId,delivery_date as deliveryDate,remarks as remarks from workorder_dtl where workorder_no = ?";
 	
 	public static String SELECT_WORKORDER_HDR = "select workorder_no as workorderNo,workorder_date as workorderDate,sales_order_no as salesOrderNo from workorder_hdr where workorder_no=?";
