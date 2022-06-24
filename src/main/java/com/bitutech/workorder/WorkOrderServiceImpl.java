@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitutech.core.util.DropDownList;
+import com.bitutech.salesorder.SalesOrderResultBean;
 
 @Service
 public class WorkOrderServiceImpl implements WorkOrderService {
@@ -23,11 +24,11 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 		return workOrderDao.getWorkOrderList();
 	}
 
-	@Override
-	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
-		// TODO Auto-generated method stub
-		return workOrderDao.getWorkOrderNumber();
-	}
+//	@Override
+//	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
+//		// TODO Auto-generated method stub
+//		return workOrderDao.getWorkOrderNumber();
+//	}
 
 	@Override
 	public WorkOrderResultBean getSalesOrderNoList() throws Exception {
@@ -64,6 +65,13 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 		// TODO Auto-generated method stub
 		return workOrderDao.delete(bean);
 	}
+	
+	@Override
+	public WorkOrderResultBean getFetchCustomerWorkOrder(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return workOrderDao.getFetchCustomerWorkOrder(customer);
+	}
+
 
 	
 

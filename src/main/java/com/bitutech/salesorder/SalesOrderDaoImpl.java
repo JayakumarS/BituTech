@@ -224,5 +224,23 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 		return resultBean;
 	}
 
+	@Override
+	public SalesOrderResultBean getfetchCustomer(String customer) {
+		// TODO Auto-generated method stub
+		SalesOrderResultBean resultBean = new SalesOrderResultBean();
+		resultBean.setSuccess(false);
+		try {
+			//resultBean.setSalesOrderBean(jdbcTemplate.queryForObject(SalesOrderQueryUtil.SELECT_SALES_QUOTE,new Object[] { bean }, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class)));
+			List<SalesOrderBean> salesOrderdtlBean = jdbcTemplate.query(SalesOrderQueryUtil.SELECT_SALES_QUOTE,new Object[] { customer },new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class));	
+			resultBean.setSalesQuoteNoDetailsList(salesOrderdtlBean);		
+			resultBean.setSuccess(true);
+		}
+		catch(Exception e) {          
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+		}
+		return resultBean;
+	}
+
 
 }

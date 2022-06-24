@@ -13,6 +13,10 @@ import org.springframework.stereotype.Repository;
 
 import com.bitutech.boo.BillOfOperationQueryUtil;
 import com.bitutech.core.util.DropDownList;
+import com.bitutech.creditNote.CreditNoteQueryUtil;
+import com.bitutech.salesorder.SalesOrderBean;
+import com.bitutech.salesorder.SalesOrderQueryUtil;
+import com.bitutech.salesorder.SalesOrderResultBean;
 
 @Repository
 public class WorkOrderDaoImpl implements WorkOrderDao {
@@ -30,7 +34,11 @@ public class WorkOrderDaoImpl implements WorkOrderDao {
 		try {
 			Map<String, Object> workOrderMap = new HashMap<String, Object>();
 			
-			workOrderMap.put("workorderNo",bean.getWorkorderNo());
+			String worderNumber =  jdbcTemplate.queryForObject(WorkOrderQueryUtil.GetWorderNumber, 
+					String.class);
+			
+			workOrderMap.put("customer",bean.getCustomer());
+			workOrderMap.put("workorderNo",worderNumber);
 			workOrderMap.put("workorderDate",bean.getWorkorderDate());
 			workOrderMap.put("salesOrderNo",bean.getSalesOrderNo());
 		    
@@ -73,14 +81,14 @@ public class WorkOrderDaoImpl implements WorkOrderDao {
 		return objLocationMasterBean;
 	}
 
-	@Override
-	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
-		// TODO Auto-generated method stub
-		WorkOrderResultBean workOrderResultBean = new WorkOrderResultBean();
-		String workOrderNumber =  jdbcTemplate.queryForObject(WorkOrderQueryUtil.GetWorderNumber, String.class);
-		workOrderResultBean.setWorkOrderNumber(workOrderNumber);
-		return workOrderResultBean;
-	}
+//	@Override
+//	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
+//		// TODO Auto-generated method stub
+//		WorkOrderResultBean workOrderResultBean = new WorkOrderResultBean();
+//		String workOrderNumber =  jdbcTemplate.queryForObject(WorkOrderQueryUtil.GetWorderNumber, String.class);
+//		workOrderResultBean.setWorkOrderNumber(workOrderNumber);
+//		return workOrderResultBean;
+//	}
 
 	@Override
 	public WorkOrderResultBean getSalesOrderNoList() throws Exception {
@@ -152,7 +160,7 @@ public class WorkOrderDaoImpl implements WorkOrderDao {
 		WorkOrderResultBean resultBean = new WorkOrderResultBean();
 		try {
 			jdbcTemplate.queryForObject(WorkOrderQueryUtil.UPDATE_WORKORDER_HDR,new BeanPropertyRowMapper<WorkOrderHdrObjBean>(WorkOrderHdrObjBean.class),new Object[]
-					{Bean.getWorkorderDate(),Bean.getSalesOrderNo(),Bean.getWorkorderNo()});
+					{ Bean.getCustomer(), Bean.getWorkorderDate(),Bean.getSalesOrderNo(),Bean.getWorkorderNo()});
 			
 			if(Bean.getWorkOrderDtlData().size()>0) {
 				jdbcTemplate.update(WorkOrderQueryUtil.DELETE_WORKORDER_DTL,Bean.getWorkorderNo());
@@ -164,7 +172,7 @@ public class WorkOrderDaoImpl implements WorkOrderDao {
 					dtlMap.put("itemId",workOrderDtlBean.getItemId());
 					dtlMap.put("quantity",workOrderDtlBean.getQuantity());
 					dtlMap.put("uomId",workOrderDtlBean.getUomId());
-					dtlMap.put("deliveryDate",workOrderDtlBean.getDeliveryDate());
+					dtlMap.put("deliveryDateObj",workOrderDtlBean.getDeliveryDateObj());
 					dtlMap.put("remarks",workOrderDtlBean.getRemarks());
 					namedParameterJdbcTemplate.update(WorkOrderQueryUtil.INSERT_WORKORDER_DTL,dtlMap);
 				}
@@ -198,6 +206,24 @@ public class WorkOrderDaoImpl implements WorkOrderDao {
 		}	
 		return resultBean;	
 		}
+
+	@Override
+	public WorkOrderResultBean getFetchCustomerWorkOrder(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		WorkOrderResultBean resultBean = new WorkOrderResultBean();
+		resultBean.setSuccess(false);
+		try {
+			//resultBean.setSalesOrderBean(jdbcTemplate.queryForObject(SalesOrderQueryUtil.SELECT_SALES_QUOTE,new Object[] { bean }, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class)));
+			List<WorkOrderHdrObjBean> salesOrderdtlBean = jdbcTemplate.query(WorkOrderQueryUtil.SELECT_SALES_QUOTE,new Object[] { customer },new BeanPropertyRowMapper<WorkOrderHdrObjBean>(WorkOrderHdrObjBean.class));	
+			resultBean.setSalesQuoteNo(salesOrderdtlBean);		
+			resultBean.setSuccess(true);
+		}
+		catch(Exception e) {          
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+		}
+		return resultBean;
+	}
 
 
 }

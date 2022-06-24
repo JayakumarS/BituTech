@@ -4,6 +4,7 @@ import java.util.List;
 
 public class WorkOrderHdrObjBean {
 	
+	private String customer;
 	private String workorderNo;
 	private String workorderDate;
 	private String salesOrderNo;
@@ -46,6 +47,12 @@ public class WorkOrderHdrObjBean {
 	}
 	public void setWorkorderDate(String workorderDate) {
 		this.workorderDate = workorderDate;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 	
 }

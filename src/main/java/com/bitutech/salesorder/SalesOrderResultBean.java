@@ -17,7 +17,7 @@ public class SalesOrderResultBean extends BasicResultBean implements Serializabl
     private List<SalesOrderBean> customerList;
 	private List<SalesOrderBean> salesOrderList;
 	private List<SalesOrderdtlBean> salesOrderdtlBean;
-	
+	private List<SalesOrderBean> salesQuoteNoDetailsList;
   
 	 public List<SalesOrderBean> getCustomerList() {
 		return customerList;
@@ -82,6 +82,14 @@ public class SalesOrderResultBean extends BasicResultBean implements Serializabl
 
 	public void setSalesOrderList(List<SalesOrderBean> salesOrderList) {
 		this.salesOrderList = salesOrderList;
+	}
+
+	public List<SalesOrderBean> getSalesQuoteNoDetailsList() {
+		return salesQuoteNoDetailsList;
+	}
+
+	public void setSalesQuoteNoDetailsList(List<SalesOrderBean> salesQuoteNoDetailsList) {
+		this.salesQuoteNoDetailsList = salesQuoteNoDetailsList;
 	}
 
 

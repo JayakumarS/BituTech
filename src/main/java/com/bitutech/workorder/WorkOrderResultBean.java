@@ -13,6 +13,8 @@ public class WorkOrderResultBean extends BasicResultBean implements Serializable
 	
 	private List<WorkOrderHdrObjBean> workOrderDetails;
 	
+	private List<WorkOrderHdrObjBean> salesQuoteNo;
+	
 	private List<WorkOrderDtlBean> WorkOrderDtlBean;
 	
 	private WorkOrderHdrObjBean workOrderHdrObjBean;
@@ -88,6 +90,14 @@ public class WorkOrderResultBean extends BasicResultBean implements Serializable
 
 	public void setWorkOrderDtlBean(List<WorkOrderDtlBean> workOrderDtlBean) {
 		WorkOrderDtlBean = workOrderDtlBean;
+	}
+
+	public List<WorkOrderHdrObjBean> getSalesQuoteNo() {
+		return salesQuoteNo;
+	}
+
+	public void setSalesQuoteNo(List<WorkOrderHdrObjBean> salesQuoteNo) {
+		this.salesQuoteNo = salesQuoteNo;
 	}
 	
 }

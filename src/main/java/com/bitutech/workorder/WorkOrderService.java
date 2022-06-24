@@ -3,6 +3,7 @@ package com.bitutech.workorder;
 import java.util.List;
 
 import com.bitutech.core.util.DropDownList;
+import com.bitutech.salesorder.SalesOrderResultBean;
 
 public interface WorkOrderService {
 
@@ -10,7 +11,7 @@ public interface WorkOrderService {
 
 	public List<WorkOrderHdrObjBean> getWorkOrderList() throws Exception;
 
-	WorkOrderResultBean getWorkOrderNumber() throws Exception;
+//	WorkOrderResultBean getWorkOrderNumber() throws Exception;
 	
 	WorkOrderResultBean getSalesOrderNoList() throws Exception;
 	
@@ -23,5 +24,7 @@ public interface WorkOrderService {
 	WorkOrderResultBean update(WorkOrderHdrObjBean bean) throws Exception;
 
 	WorkOrderResultBean delete(String bean) throws Exception;
+
+	WorkOrderResultBean getFetchCustomerWorkOrder(String salesQuote) throws Exception;
 
 }

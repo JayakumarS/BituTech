@@ -7,6 +7,7 @@ public class WorkOrderDtlBean {
 	private Integer quantity;
 	private Integer uomId;
 	private String deliveryDate;
+	private String deliveryDateObj;
 	private String remarks;
 	private String createdBy;
 	private String createdDate;
@@ -65,6 +66,12 @@ public class WorkOrderDtlBean {
 	}
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+	public String getDeliveryDateObj() {
+		return deliveryDateObj;
+	}
+	public void setDeliveryDateObj(String deliveryDateObj) {
+		this.deliveryDateObj = deliveryDateObj;
 	}
 	
 	

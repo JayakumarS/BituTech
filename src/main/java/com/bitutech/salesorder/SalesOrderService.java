@@ -26,4 +26,6 @@ public interface SalesOrderService {
 
 	SalesOrderResultBean getfetchSalesQuote(String salesQuote) throws Exception;
 
+	SalesOrderResultBean getfetchCustomer(String salesQuote) throws Exception;
+
 }

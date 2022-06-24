@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bitutech.boo.BillOfOperationBean;
 import com.bitutech.boo.BillOfOperationResultBean;
 import com.bitutech.core.util.CustomException;
+import com.bitutech.salesorder.SalesOrderResultBean;
 
 @RestController
 @RequestMapping("/api/auth/app/workOrder")
@@ -39,13 +40,13 @@ public class WorkOrderController {
    	}
 
 	
-	@RequestMapping(value = "/getWorkOrderNumber")
-   	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
-		WorkOrderResultBean objResultBean = new WorkOrderResultBean();
-		objResultBean = workOrderService.getWorkOrderNumber();
-		objResultBean.setSuccess(true);
-   		return objResultBean;
-   	}
+//	@RequestMapping(value = "/getWorkOrderNumber")
+//   	public WorkOrderResultBean getWorkOrderNumber() throws Exception {
+//		WorkOrderResultBean objResultBean = new WorkOrderResultBean();
+//		objResultBean = workOrderService.getWorkOrderNumber();
+//		objResultBean.setSuccess(true);
+//   		return objResultBean;
+//   	}
 	
 	@RequestMapping(value = "/getSalesOrderNoList")
    	public WorkOrderResultBean getSalesOrderNoList() throws Exception {
@@ -96,6 +97,23 @@ public class WorkOrderController {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+		}
+		return objResultBean;
+	}
+	
+	@GetMapping(value="/getFetchCustomerWorkOrder")
+	public WorkOrderResultBean getFetchCustomerWorkOrder(@RequestParam("workOrder") String salesQuote) {
+		
+//		Integer value= Integer.parseInt(salesQuote);
+		
+		WorkOrderResultBean objResultBean = new WorkOrderResultBean();
+		try {
+			objResultBean = workOrderService.getFetchCustomerWorkOrder(salesQuote);
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
 		}
 		return objResultBean;
 	}

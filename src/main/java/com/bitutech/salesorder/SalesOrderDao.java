@@ -26,4 +26,6 @@ public interface SalesOrderDao {
 
 	SalesOrderResultBean getfetchSalesQuote(String bean) throws Exception;
 
+	SalesOrderResultBean getfetchCustomer(String customer) throws Exception;
+
 }

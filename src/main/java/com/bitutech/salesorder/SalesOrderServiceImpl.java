@@ -65,6 +65,12 @@ public class SalesOrderServiceImpl implements SalesOrderService {
 		return salesOrderDao.getfetchSalesQuote(salesQuote);
 	}
 
+	@Override
+	public SalesOrderResultBean getfetchCustomer(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return salesOrderDao.getfetchCustomer(customer);
+	}
+
 
 	
 

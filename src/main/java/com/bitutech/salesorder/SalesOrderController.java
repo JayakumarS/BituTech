@@ -127,6 +127,24 @@ public class SalesOrderController {
 		}
 		return objResultBean;
 	}
+	
+	@GetMapping(value="/getfetchCustomer")
+	public SalesOrderResultBean getfetchCustomer(@RequestParam("salesQuote") String salesQuote) {
+		
+//		Integer value= Integer.parseInt(salesQuote);
+		
+		SalesOrderResultBean objResultBean = new SalesOrderResultBean();
+		try {
+			objResultBean = salesOrderService.getfetchCustomer(salesQuote);
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		return objResultBean;
+	}
+	
 
 	
 }
