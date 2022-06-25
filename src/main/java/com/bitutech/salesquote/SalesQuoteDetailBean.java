@@ -5,9 +5,16 @@ public class SalesQuoteDetailBean {
 	private String salesQuoteNo;
 	private String countValue;
 	private Integer item;
+	private Integer uomId;
 	private Integer qty;
 	private Integer price;
 	
+	public Integer getUomId() {
+		return uomId;
+	}
+	public void setUomId(Integer uomId) {
+		this.uomId = uomId;
+	}
 	public String getCountValue() {
 		return countValue;
 	}

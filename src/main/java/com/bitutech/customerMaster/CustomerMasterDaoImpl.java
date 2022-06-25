@@ -68,7 +68,10 @@ public class CustomerMasterDaoImpl implements CustomerMasterDao {
 		    customerMasterMap.put("phoneno", bean.getPhoneno());
 		    customerMasterMap.put("landline", bean.getLandline());
 		    customerMasterMap.put("email", bean.getEmail());
-			String cusCode =  jdbcTemplate.queryForObject(CustomerMasterQueryUtil.GETCUSCODE, String.class);
+		    customerMasterMap.put("isActive", bean.getIsActive());
+		    
+			
+		    String cusCode =  jdbcTemplate.queryForObject(CustomerMasterQueryUtil.GETCUSCODE, String.class);
 			customerMasterMap.put("cusCode", cusCode);
 		    
 			namedParameterJdbcTemplate.update(CustomerMasterQueryUtil.INSERT_CUSTOMER_MASTER,customerMasterMap);
@@ -169,7 +172,7 @@ public class CustomerMasterDaoImpl implements CustomerMasterDao {
 			    customerMasterMap.put("landline", bean.getLandline());
 			    customerMasterMap.put("email", bean.getEmail());
 				customerMasterMap.put("cusCode", bean.getCusCode());
-			    
+				customerMasterMap.put("isActive", bean.getIsActive());
 				namedParameterJdbcTemplate.update(CustomerMasterQueryUtil.UPDATE_CUSTOMER_MASTER,customerMasterMap);
 			   resultBean.setSuccess(true);
 			

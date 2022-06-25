@@ -42,6 +42,7 @@ public class BillOfOperationDaoImpl implements BillOfOperationDao {
 					dtlMap.put("processSeqNo",booDetailBean.getProcessSeqNo());
 					dtlMap.put("processName",booDetailBean.getProcessName());
 					dtlMap.put("approxTime",booDetailBean.getApproxTime());
+					dtlMap.put("approxCost",booDetailBean.getApproxCost());
 					dtlMap.put("processRemarks",booDetailBean.getProcessRemarks());
 					namedParameterJdbcTemplate.update(BillOfOperationQueryUtil.INSERT_BILL_OF_OPERATION_DETAIL,dtlMap);
 				}
@@ -105,6 +106,7 @@ public class BillOfOperationDaoImpl implements BillOfOperationDao {
 					dtlMap.put("processSeqNo",booDetailBean.getProcessSeqNo());
 					dtlMap.put("processName",booDetailBean.getProcessName());
 					dtlMap.put("approxTime",booDetailBean.getApproxTime());
+					dtlMap.put("approxCost",booDetailBean.getApproxCost());
 					dtlMap.put("processRemarks",booDetailBean.getProcessRemarks());
 					namedParameterJdbcTemplate.update(BillOfOperationQueryUtil.INSERT_BILL_OF_OPERATION_DETAIL,dtlMap);
 				}

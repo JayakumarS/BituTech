@@ -59,6 +59,7 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 			
 				    		 salesQuoteDtlMap.put("countValue", countValue1);
 				    		 salesQuoteDtlMap.put("item", SalesQuoteDetailBean.getItem());
+				    		 salesQuoteDtlMap.put("uomId", SalesQuoteDetailBean.getUomId());
 				    		 salesQuoteDtlMap.put("qty", SalesQuoteDetailBean.getQty());
 				    		 salesQuoteDtlMap.put("price", SalesQuoteDetailBean.getPrice());
 			
@@ -142,6 +143,7 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 				
 					    		 salesQuoteDtlMap.put("countValue",SalesQuoteDetailBean. getCountValue());
 					    		 salesQuoteDtlMap.put("item", SalesQuoteDetailBean.getItem());
+					    		 salesQuoteDtlMap.put("uomId",SalesQuoteDetailBean.getUomId());
 					    		 salesQuoteDtlMap.put("qty", SalesQuoteDetailBean.getQty());
 					    		 salesQuoteDtlMap.put("price", SalesQuoteDetailBean.getPrice());
 				

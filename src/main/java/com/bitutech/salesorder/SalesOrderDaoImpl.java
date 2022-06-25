@@ -59,6 +59,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 						Map<String, Object> dtlMap = new HashMap<>();
 						dtlMap.put("salesOrderNo",salesorderno);
 						dtlMap.put("item",salesOrderdtlBean.getItem());
+						dtlMap.put("uomId",salesOrderdtlBean.getUomId());
 						dtlMap.put("qty",salesOrderdtlBean.getQty());
 						dtlMap.put("price",salesOrderdtlBean.getPrice());
 						dtlMap.put("createdBy","E0001");
@@ -146,6 +147,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 						Map<String, Object> dtlMap = new HashMap<>();
 						dtlMap.put("salesOrderNo",salesOrder);
 						dtlMap.put("item",salesOrderdtlBean.getItem());
+						dtlMap.put("uomId",salesOrderdtlBean.getUomId());
 						dtlMap.put("qty",salesOrderdtlBean.getQty());
 						dtlMap.put("price",salesOrderdtlBean.getPrice());
 						dtlMap.put("createdBy","E0001");

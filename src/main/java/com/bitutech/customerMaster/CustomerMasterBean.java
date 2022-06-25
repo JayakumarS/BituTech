@@ -38,7 +38,15 @@ public class CustomerMasterBean {
 	private String landline;
 	private String email;
 	private String cusCode;
+	private String isActive;
 	
+	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 	public String getCusCode() {
 		return cusCode;
 	}

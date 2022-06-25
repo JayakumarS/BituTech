@@ -4,10 +4,17 @@ public class BooDetailBean {
 	
 	private String processSeqNo;
 	private String processName;
+	private Integer approxCost;
 	private String approxTime;
 	private String processRemarks;
 	
 	
+	public Integer getApproxCost() {
+		return approxCost;
+	}
+	public void setApproxCost(Integer approxCost) {
+		this.approxCost = approxCost;
+	}
 	public String getProcessName() {
 		return processName;
 	}
