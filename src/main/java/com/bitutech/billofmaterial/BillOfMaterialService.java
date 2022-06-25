@@ -14,8 +14,10 @@ public interface BillOfMaterialService {
 	BillOfMaterialResultBean delete(String bean) throws Exception;
 	
 	BillOfMaterialResultBean getWorkOrderList() throws Exception;
+
+	BillOfMaterialResultBean getFetchCustomerBOM(String salesQuote) throws Exception;
 	
-	BillOfMaterialResultBean getBomNumber() throws Exception;
+//	BillOfMaterialResultBean getBomNumber() throws Exception;
 	
 	
 }

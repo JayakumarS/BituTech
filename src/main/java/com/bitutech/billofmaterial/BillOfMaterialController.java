@@ -1,6 +1,7 @@
 package com.bitutech.billofmaterial;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +28,11 @@ public class BillOfMaterialController {
 		
 	}
 	
-	@RequestMapping(value = "/getBomNumber")
-   	public BillOfMaterialResultBean getBomNumber() throws Exception {
-		BillOfMaterialResultBean objResultBean = bomService.getBomNumber();
-   		return objResultBean;
-   	}
+//	@RequestMapping(value = "/getBomNumber")
+//   	public BillOfMaterialResultBean getBomNumber() throws Exception {
+//		BillOfMaterialResultBean objResultBean = bomService.getBomNumber();
+//   		return objResultBean;
+//   	}
 	
 	
 	@RequestMapping(value = "/getList")
@@ -81,6 +82,23 @@ public class BillOfMaterialController {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}
+		return objResultBean;
+	}
+	
+	@GetMapping(value="/getFetchCustomerBOM")
+	public BillOfMaterialResultBean getFetchCustomerBOM(@RequestParam("billOfMaterial") String salesQuote) {
+		
+//		Integer value= Integer.parseInt(salesQuote);
+		
+		BillOfMaterialResultBean objResultBean = new BillOfMaterialResultBean();
+		try {
+			objResultBean = bomService.getFetchCustomerBOM(salesQuote);
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
 		}
 		return objResultBean;
 	}

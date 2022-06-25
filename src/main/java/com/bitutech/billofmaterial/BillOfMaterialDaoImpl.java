@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import com.bitutech.core.util.DropDownList;
 import com.bitutech.salesorder.SalesOrderQueryUtil;
+import com.bitutech.workorder.WorkOrderHdrObjBean;
+import com.bitutech.workorder.WorkOrderQueryUtil;
+import com.bitutech.workorder.WorkOrderResultBean;
 
 @Repository
 public class BillOfMaterialDaoImpl implements BillOfMaterialDao {
@@ -28,8 +31,11 @@ public class BillOfMaterialDaoImpl implements BillOfMaterialDao {
 		BillOfMaterialResultBean resultBean = new BillOfMaterialResultBean();
 		try {
 			Map<String, Object> bomMap = new HashMap<>();
+			String bomNumber =  jdbcTemplate.queryForObject(BillOfMaterialQueryUtil.GetBooNumber, String.class);
+
+			bomMap.put("customer",bean.getCustomer());
 			bomMap.put("workorderNo",bean.getWorkorderNo());
-			bomMap.put("bomNo",bean.getBomNo());
+			bomMap.put("bomNo",bomNumber);
 			String bomNo = namedParameterJdbcTemplate.queryForObject(BillOfMaterialQueryUtil.Insert_Bom_Hdr,bomMap,String.class);
 			
 			if(!bomNo.isEmpty()) {
@@ -89,21 +95,21 @@ public class BillOfMaterialDaoImpl implements BillOfMaterialDao {
 		return bomResultBean;
 	}
 
-	@Override
-	public BillOfMaterialResultBean getBomNumber() throws Exception {
-		// TODO Auto-generated method stub
-		BillOfMaterialResultBean bomResultBean = new BillOfMaterialResultBean();
-		bomResultBean.setSuccess(false);
-		try {
-			String bomNumber =  jdbcTemplate.queryForObject(BillOfMaterialQueryUtil.GetWorderNumber, String.class);
-			bomResultBean.setBomNumber(bomNumber);
-			bomResultBean.setSuccess(true);
-		}catch(Exception e) {
-			e.printStackTrace();
-			bomResultBean.setSuccess(false);
-		}
-		return bomResultBean;
-	}
+//	@Override
+//	public BillOfMaterialResultBean getBomNumber() throws Exception {
+//		// TODO Auto-generated method stub
+//		BillOfMaterialResultBean bomResultBean = new BillOfMaterialResultBean();
+//		bomResultBean.setSuccess(false);
+//		try {
+//			String bomNumber =  jdbcTemplate.queryForObject(BillOfMaterialQueryUtil.GetWorderNumber, String.class);
+//			bomResultBean.setBomNumber(bomNumber);
+//			bomResultBean.setSuccess(true);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			bomResultBean.setSuccess(false);
+//		}
+//		return bomResultBean;
+//	}
 
 	@Override
 	public BillOfMaterialResultBean edit(String bean) throws Exception {
@@ -128,6 +134,7 @@ public class BillOfMaterialDaoImpl implements BillOfMaterialDao {
 		BillOfMaterialResultBean resultBean = new BillOfMaterialResultBean();
 		try {
 			Map<String, Object> bomMap = new HashMap<>();
+			bomMap.put("customer",bean.getCustomer());
  			bomMap.put("bomNo",bean.getBomNo());
 			bomMap.put("workorderNo",bean.getWorkorderNo());
 			bomMap.put("bomNo",bean.getBomNo());
@@ -171,6 +178,24 @@ public class BillOfMaterialDaoImpl implements BillOfMaterialDao {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}
+		return resultBean;
+	}
+
+	@Override
+	public BillOfMaterialResultBean getFetchCustomerBOM(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		BillOfMaterialResultBean resultBean = new BillOfMaterialResultBean();
+		resultBean.setSuccess(false);
+		try {
+			//resultBean.setSalesOrderBean(jdbcTemplate.queryForObject(SalesOrderQueryUtil.SELECT_SALES_QUOTE,new Object[] { bean }, new BeanPropertyRowMapper<SalesOrderBean>(SalesOrderBean.class)));
+			List<BillOfMaterialHdrObjBean> bomBean = jdbcTemplate.query(BillOfMaterialQueryUtil.SELECT_Bill_Of_Material,new Object[] { customer },new BeanPropertyRowMapper<BillOfMaterialHdrObjBean>(BillOfMaterialHdrObjBean.class));	
+			resultBean.setCustomerListDetails(bomBean);		
+			resultBean.setSuccess(true);
+		}
+		catch(Exception e) {          
+			e.printStackTrace();
+			resultBean.setSuccess(false);
 		}
 		return resultBean;
 	}

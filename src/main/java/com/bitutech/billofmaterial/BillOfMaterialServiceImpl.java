@@ -26,11 +26,11 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		return billOfMaterialDao.getWorkOrderList();
 	}
 
-	@Override
-	public BillOfMaterialResultBean getBomNumber() throws Exception {
-		// TODO Auto-generated method stub
-		return billOfMaterialDao.getBomNumber();
-	}
+//	@Override
+//	public BillOfMaterialResultBean getBomNumber() throws Exception {
+//		// TODO Auto-generated method stub
+//		return billOfMaterialDao.getBomNumber();
+//	}
 
 	@Override
 	public BillOfMaterialResultBean edit(String bean) throws Exception {
@@ -48,6 +48,12 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	public BillOfMaterialResultBean delete(String bean) throws Exception {
 		// TODO Auto-generated method stub
 		return billOfMaterialDao.delete(bean);
+	}
+
+	@Override
+	public BillOfMaterialResultBean getFetchCustomerBOM(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return billOfMaterialDao.getFetchCustomerBOM(customer);
 	}
 
 	

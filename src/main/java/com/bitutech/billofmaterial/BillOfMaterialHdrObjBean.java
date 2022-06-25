@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BillOfMaterialHdrObjBean {
 	
-	
+	private String customer;
 	private String bomNo;
 	private String workorderNo;
 	private String booNo;
@@ -59,6 +59,12 @@ public class BillOfMaterialHdrObjBean {
 	}
 	public void setBillOfMaterialDtlObjBean(List<BillOfMaterialDtlObjBean> billOfMaterialDtlObjBean) {
 		this.billOfMaterialDtlObjBean = billOfMaterialDtlObjBean;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 	
 	

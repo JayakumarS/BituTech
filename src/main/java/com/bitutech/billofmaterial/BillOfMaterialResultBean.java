@@ -13,6 +13,8 @@ public class BillOfMaterialResultBean extends BasicResultBean implements Seriali
 	
 	private List<BillOfMaterialHdrObjBean> bomDetails;
 	
+	private List<BillOfMaterialHdrObjBean> customerListDetails;
+	
 	private String bomNumber;
 	
 	private List<DropDownList> workOrderNoList;
@@ -69,6 +71,14 @@ public class BillOfMaterialResultBean extends BasicResultBean implements Seriali
 
 	public void setBillOfMaterialHdrObjBean(BillOfMaterialHdrObjBean billOfMaterialHdrObjBean) {
 		this.billOfMaterialHdrObjBean = billOfMaterialHdrObjBean;
+	}
+
+	public List<BillOfMaterialHdrObjBean> getCustomerListDetails() {
+		return customerListDetails;
+	}
+
+	public void setCustomerListDetails(List<BillOfMaterialHdrObjBean> customerListDetails) {
+		this.customerListDetails = customerListDetails;
 	}
 
 
