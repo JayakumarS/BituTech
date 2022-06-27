@@ -38,17 +38,24 @@ public class CustomerMasterBean {
 	private String landline;
 	private String email;
 	private String cusCode;
-	private String isActive;
+	private Boolean isActive;
 	
+	//private String isActive;
 	
-	public String getIsActive() {
+	/*public String getIsActive() {
 		return isActive;
 	}
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
-	}
+	}*/
 	public String getCusCode() {
 		return cusCode;
+	}
+	public Boolean getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 	public void setCusCode(String cusCode) {
 		this.cusCode = cusCode;
