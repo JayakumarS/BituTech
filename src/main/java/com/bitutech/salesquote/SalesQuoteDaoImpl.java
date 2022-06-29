@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bitutech.salesorder.SalesOrderBean;
-import com.bitutech.salesorder.SalesOrderQueryUtil;
+
 
 @Repository
 public class SalesQuoteDaoImpl implements SalesQuoteDao {
@@ -42,6 +42,7 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 			salesQuoteMap.put("id", bean.getId());
 			salesQuoteMap.put("text", bean.getText());
 			salesQuoteMap.put("modifiedBy","E0001");
+			salesQuoteMap.put("total", bean.getTotal());
 			String countValue =  jdbcTemplate.queryForObject(SalesQuoteQueryUtil.GETCOUNT, String.class);
 			
 			salesQuoteMap.put("countValue", countValue);
@@ -62,6 +63,8 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 				    		 salesQuoteDtlMap.put("uomId", SalesQuoteDetailBean.getUomId());
 				    		 salesQuoteDtlMap.put("qty", SalesQuoteDetailBean.getQty());
 				    		 salesQuoteDtlMap.put("price", SalesQuoteDetailBean.getPrice());
+				    		 salesQuoteDtlMap.put("rate", SalesQuoteDetailBean.getRate());
+
 			
 
 			  namedParameterJdbcTemplate.update(SalesQuoteQueryUtil.INSERT_SALES_QUOTE_DTL,salesQuoteDtlMap);
@@ -129,7 +132,7 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 //					
 //				
 					jdbcTemplate.queryForObject(SalesQuoteQueryUtil.UPDATE_SALES_QUOTE_HDR,new BeanPropertyRowMapper<SalesQuoteBean>(SalesQuoteBean.class), new Object[]
-							{ Bean.getCustomer(),Bean.getValidFrom(),Bean.getValidTo(),Bean.getTermCondition(),Bean.getCurrency(),Bean.getExpectedDate(),Bean.getCountValue()});
+							{ Bean.getCustomer(),Bean.getValidFrom(),Bean.getValidTo(),Bean.getTermCondition(),Bean.getCurrency(),Bean.getExpectedDate(),Bean.getCountValue(),Bean.getTotal()});
 					
 					
 						 
@@ -146,7 +149,8 @@ public class SalesQuoteDaoImpl implements SalesQuoteDao {
 					    		 salesQuoteDtlMap.put("uomId",SalesQuoteDetailBean.getUomId());
 					    		 salesQuoteDtlMap.put("qty", SalesQuoteDetailBean.getQty());
 					    		 salesQuoteDtlMap.put("price", SalesQuoteDetailBean.getPrice());
-				
+					    		 salesQuoteDtlMap.put("rate", SalesQuoteDetailBean.getRate());
+
 
 				  namedParameterJdbcTemplate.update(SalesQuoteQueryUtil.INSERT_SALES_QUOTE_DTL,salesQuoteDtlMap);
 				  

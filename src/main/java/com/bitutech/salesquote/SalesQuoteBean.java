@@ -14,8 +14,16 @@ public class SalesQuoteBean {
 	private String text;
 	private String countValue;
 	private String salesQuoteNo;
+	private Integer total;
 	private List<SalesQuoteDetailBean> salesQuoteDetailBean;
 	public List<SalesQuoteDetailBean> dataArray;
+	
+	public Integer getTotal() {
+		return total;
+	}
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
 	public String getSalesQuoteNo() {
 		return salesQuoteNo;
 	}

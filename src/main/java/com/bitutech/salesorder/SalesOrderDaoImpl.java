@@ -44,6 +44,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 			salesOrderMap.put("deliveryDate", bean.getDeliveryDate());
 			salesOrderMap.put("id", bean.getId());
 			salesOrderMap.put("termCondition", bean.getTermCondition());
+			salesOrderMap.put("total", bean.getTotal());
 			salesOrderMap.put("salesQuoteNo", bean.getSalesQuoteNo());
 
 			salesOrderMap.put("modifiedBy","E0001");
@@ -60,6 +61,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 						dtlMap.put("salesOrderNo",salesorderno);
 						dtlMap.put("item",salesOrderdtlBean.getItem());
 						dtlMap.put("uomId",salesOrderdtlBean.getUomId());
+						dtlMap.put("rate",salesOrderdtlBean.getRate());
 						dtlMap.put("qty",salesOrderdtlBean.getQty());
 						dtlMap.put("price",salesOrderdtlBean.getPrice());
 						dtlMap.put("createdBy","E0001");
@@ -132,6 +134,8 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 			salesOrderMap.put("id", bean.getId());
 			salesOrderMap.put("salesQuoteNo", bean.getSalesQuoteNo());
 			salesOrderMap.put("termCondition", bean.getTermCondition());
+			salesOrderMap.put("total", bean.getTotal());
+
 			salesOrderMap.put("modifiedBy","E0001");
  			salesOrderMap.put("countValue", bean.getCountValue());
 			String salesOrder =  bean.getCountValue();
@@ -148,6 +152,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 						dtlMap.put("salesOrderNo",salesOrder);
 						dtlMap.put("item",salesOrderdtlBean.getItem());
 						dtlMap.put("uomId",salesOrderdtlBean.getUomId());
+						dtlMap.put("rate",salesOrderdtlBean.getRate());
 						dtlMap.put("qty",salesOrderdtlBean.getQty());
 						dtlMap.put("price",salesOrderdtlBean.getPrice());
 						dtlMap.put("createdBy","E0001");

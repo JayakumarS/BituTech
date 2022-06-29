@@ -6,9 +6,16 @@ public class SalesQuoteDetailBean {
 	private String countValue;
 	private Integer item;
 	private Integer uomId;
+	private Integer rate;
 	private Integer qty;
 	private Integer price;
 	
+	public Integer getRate() {
+		return rate;
+	}
+	public void setRate(Integer rate) {
+		this.rate = rate;
+	}
 	public Integer getUomId() {
 		return uomId;
 	}

@@ -18,6 +18,14 @@ public class SalesOrderBean {
 	private String salesOrderNo;
 	private String salesQuoteNo;
 	private String expectedDate;
+	private Integer total;
+	
+	public Integer getTotal() {
+		return total;
+	}
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
 	private List<SalesOrderdtlBean> salesOrderdtlBean;
 	
 	

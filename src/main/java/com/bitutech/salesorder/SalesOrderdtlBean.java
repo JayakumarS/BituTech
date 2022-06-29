@@ -4,6 +4,7 @@ public class SalesOrderdtlBean {
 
 	private Integer item;
 	private Integer uomId;
+	private Integer rate;
 	private Integer qty;
 	private Integer price;
 	private String salesOrderNo;
@@ -11,6 +12,14 @@ public class SalesOrderdtlBean {
 	private Integer id;
 	private String text;
 	private String salesQuoteNo;
+
+	public Integer getRate() {
+		return rate;
+	}
+
+	public void setRate(Integer rate) {
+		this.rate = rate;
+	}
 
 	public Integer getUomId() {
 		return uomId;
