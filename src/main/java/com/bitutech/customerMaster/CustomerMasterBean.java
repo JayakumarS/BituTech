@@ -40,9 +40,37 @@ public class CustomerMasterBean {
 	private String cusCode;
 	private Boolean isActive;
 	
+<<<<<<< Updated upstream
 	//private String isActive;
 	
 	/*public String getIsActive() {
+=======
+	private String fileUploadUrl;
+	private String kycUploadUrl;
+	private String exemptionUploadUrl;
+	private String nonGSTUploadUrl;
+	
+	
+	public String getKycUploadUrl() {
+		return kycUploadUrl;
+	}
+	public void setKycUploadUrl(String kycUploadUrl) {
+		this.kycUploadUrl = kycUploadUrl;
+	}
+	public String getExemptionUploadUrl() {
+		return exemptionUploadUrl;
+	}
+	public void setExemptionUploadUrl(String exemptionUploadUrl) {
+		this.exemptionUploadUrl = exemptionUploadUrl;
+	}
+	public String getNonGSTUploadUrl() {
+		return nonGSTUploadUrl;
+	}
+	public void setNonGSTUploadUrl(String nonGSTUploadUrl) {
+		this.nonGSTUploadUrl = nonGSTUploadUrl;
+	}
+	public String getIsActive() {
+>>>>>>> Stashed changes
 		return isActive;
 	}
 	public void setIsActive(String isActive) {
@@ -264,6 +292,12 @@ public class CustomerMasterBean {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getFileUploadUrl() {
+		return fileUploadUrl;
+	}
+	public void setFileUploadUrl(String fileUploadUrl) {
+		this.fileUploadUrl = fileUploadUrl;
 	}
 	
 	

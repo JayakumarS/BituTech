@@ -12,7 +12,6 @@ public class CountryMasterBean {
 	private String text;
 	
 	
-	
 	public Boolean getIsActive() {
 		return isActive;
 	}
@@ -55,6 +54,7 @@ public class CountryMasterBean {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+
 	
 	
 	

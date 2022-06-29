@@ -70,6 +70,13 @@ public class CustomerMasterDaoImpl implements CustomerMasterDao {
 		    customerMasterMap.put("email", bean.getEmail());
 		    customerMasterMap.put("isActive", bean.getIsActive());
 		    
+		    customerMasterMap.put("fileUploadUrl", bean.getFileUploadUrl());
+		    customerMasterMap.put("kycUploadUrl", bean.getKycUploadUrl());
+		    customerMasterMap.put("exemptionUploadUrl", bean.getExemptionUploadUrl());
+		    customerMasterMap.put("nonGSTUploadUrl", bean.getNonGSTUploadUrl());
+		    
+		   
+		    
 			
 		    String cusCode =  jdbcTemplate.queryForObject(CustomerMasterQueryUtil.GETCUSCODE, String.class);
 			customerMasterMap.put("cusCode", cusCode);
