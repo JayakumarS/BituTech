@@ -40,11 +40,7 @@ public class CustomerMasterBean {
 	private String cusCode;
 	private Boolean isActive;
 	
-<<<<<<< Updated upstream
-	//private String isActive;
-	
-	/*public String getIsActive() {
-=======
+
 	private String fileUploadUrl;
 	private String kycUploadUrl;
 	private String exemptionUploadUrl;
@@ -69,13 +65,7 @@ public class CustomerMasterBean {
 	public void setNonGSTUploadUrl(String nonGSTUploadUrl) {
 		this.nonGSTUploadUrl = nonGSTUploadUrl;
 	}
-	public String getIsActive() {
->>>>>>> Stashed changes
-		return isActive;
-	}
-	public void setIsActive(String isActive) {
-		this.isActive = isActive;
-	}*/
+	
 	public String getCusCode() {
 		return cusCode;
 	}
