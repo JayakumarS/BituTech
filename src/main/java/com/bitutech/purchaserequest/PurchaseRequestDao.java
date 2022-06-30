@@ -14,7 +14,7 @@ public interface PurchaseRequestDao {
 
 	List<PurchaseRequestBean> getPurchaseRequestList() throws Exception;
 
-	PurchaseRequestResultBean getRequisitionNo() throws Exception;
+//	PurchaseRequestResultBean getRequisitionNo() throws Exception;
 
 	//PurchaseRequestResultBean getRequisitionNoList() throws Exception;
 

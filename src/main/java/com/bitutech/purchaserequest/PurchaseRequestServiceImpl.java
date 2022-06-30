@@ -24,11 +24,11 @@ public class PurchaseRequestServiceImpl implements PurchaseRequestService {
 				
 			
 	}
-	@Override
-	public PurchaseRequestResultBean getRequisitionNo() throws Exception {
-		// TODO Auto-generated method stub
-		return purchaseRequestDao.getRequisitionNo();
-	}
+//	@Override
+//	public PurchaseRequestResultBean getRequisitionNo() throws Exception {
+//		// TODO Auto-generated method stub
+//		return purchaseRequestDao.getRequisitionNo();
+//	}
 
 //	@Override
 //	public PurchaseRequestResultBean getRequisitionNoList() throws Exception {

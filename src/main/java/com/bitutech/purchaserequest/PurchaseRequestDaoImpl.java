@@ -25,7 +25,9 @@ public class PurchaseRequestDaoImpl  implements PurchaseRequestDao{
 		PurchaseRequestResultBean resultBean = new PurchaseRequestResultBean();
 		try {
 			Map<String, Object> purchaseRequestMap = new HashMap<String, Object>();
-			purchaseRequestMap.put("requisitionNo",bean.getRequisitionNo());
+			String requisitionNo = jdbcTemplate.queryForObject(PurchaseRequestQueryUtil.getRequisitionNo,String.class);
+			
+			purchaseRequestMap.put("requisitionNo",requisitionNo);
 			purchaseRequestMap.put("company",bean.getCompany());
 			purchaseRequestMap.put("requestType",bean.getRequestType());
 			purchaseRequestMap.put("requestDate",bean.getRequestDate());
@@ -182,14 +184,14 @@ public class PurchaseRequestDaoImpl  implements PurchaseRequestDao{
 			}	
 			return resultBean;	}
 
-		@Override
-		public PurchaseRequestResultBean getRequisitionNo() throws Exception {
-			// TODO Auto-generated method stub
-			PurchaseRequestResultBean resultBean = new PurchaseRequestResultBean();
-			String requisitionNo = jdbcTemplate.queryForObject(PurchaseRequestQueryUtil.getRequisitionNo,String.class);
-			resultBean.setRequisitionNo(requisitionNo);
-			return resultBean;
-		}
+//		@Override
+//		public PurchaseRequestResultBean getRequisitionNo() throws Exception {
+//			// TODO Auto-generated method stub
+//			PurchaseRequestResultBean resultBean = new PurchaseRequestResultBean();
+//			String requisitionNo = jdbcTemplate.queryForObject(PurchaseRequestQueryUtil.getRequisitionNo,String.class);
+//			resultBean.setRequisitionNo(requisitionNo);
+//			return resultBean;
+//		}
 
 //		@Override
 //		public PurchaseRequestResultBean getRequisitionNoList() throws Exception {

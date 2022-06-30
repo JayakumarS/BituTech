@@ -34,13 +34,13 @@ public class PurchaseRequestController {
    		return objResultBean;
    	}
 
-	@RequestMapping(value = "/getRequisitionNo")
-	public PurchaseRequestResultBean getRequisitionNo() throws Exception{
-		PurchaseRequestResultBean objResultBean = new PurchaseRequestResultBean();
-		objResultBean = purchaseRequestService.getRequisitionNo();
-		objResultBean.setSuccess(true);
-		return objResultBean;
-	}
+//	@RequestMapping(value = "/getRequisitionNo")
+//	public PurchaseRequestResultBean getRequisitionNo() throws Exception{
+//		PurchaseRequestResultBean objResultBean = new PurchaseRequestResultBean();
+//		objResultBean = purchaseRequestService.getRequisitionNo();
+//		objResultBean.setSuccess(true);
+//		return objResultBean;
+//	}
 	
 //	@RequestMapping(value = "/getRequisitionNoList")
 //	public PurchaseRequestResultBean getRequisitionNoList() throws Exception {
