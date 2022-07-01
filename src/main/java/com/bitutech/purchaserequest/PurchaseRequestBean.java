@@ -15,6 +15,23 @@ public class PurchaseRequestBean {
 	private String requestedBy;
 	private String prReqNo;
 	private String costCenter;
+	private String destinationName;
+	private String sourceLocationName;
+	
+	
+	
+	public String getSourceLocationName() {
+		return sourceLocationName;
+	}
+	public void setSourceLocationName(String sourceLocationName) {
+		this.sourceLocationName = sourceLocationName;
+	}
+	public String getDestinationName() {
+		return destinationName;
+	}
+	public void setDestinationName(String destinationName) {
+		this.destinationName = destinationName;
+	}
 	public String getCompany() {
 		return company;
 	}
