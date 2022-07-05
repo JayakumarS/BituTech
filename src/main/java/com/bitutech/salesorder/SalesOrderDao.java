@@ -28,4 +28,6 @@ public interface SalesOrderDao {
 
 	SalesOrderResultBean getfetchCustomer(String customer) throws Exception;
 
+	SalesOrderResultBean mail(String code) throws Exception;
+
 }

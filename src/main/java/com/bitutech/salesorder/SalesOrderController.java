@@ -101,6 +101,18 @@ public class SalesOrderController {
 		return objResultBean;
 	}
 	
+	@RequestMapping(value = "/mail")
+	public SalesOrderResultBean mail(@RequestParam("mailOrder") String mailOrder) {
+		SalesOrderResultBean objResultBean = new SalesOrderResultBean();
+		try {
+			objResultBean = salesOrderService.mail(mailOrder);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return objResultBean;
+	}
+	
 	// Sales Quote Dropdown List
 	@RequestMapping(value = "/getSalesOrderListService")
    	public SalesOrderResultBean getSalesOrderListService() throws Exception {

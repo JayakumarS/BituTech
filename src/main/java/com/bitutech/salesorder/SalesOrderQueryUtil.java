@@ -18,7 +18,7 @@ public class SalesOrderQueryUtil {
 	public static final String DELETE_SALESORDER_DTL = "delete from sales_order_dtl where sales_order_no = ?";
 	public static final String GET_COSTOMER_LIST = "select customer_code as id ,customer_name as text from customer ";
 	public static final String GET_SALES_ORDER_LIST = "select sales_quote_no as id ,sales_quote_no as text from sales_quote_hdr";
-	public static final String SELECT_SALES_QUOTE_HDR = "select customer_code as customer,to_char(valid_from,'YYYY-MM-DD') as validFrom,to_char(valid_till,'YYYY-MM-DD') as validTo,sales_quote_no as salesQuoteNo,terms_n_conditions as termCondition,currency as currency, to_char(exp_date_of_delivery,'YYYY-MM-DD') as expectedDate from sales_quote_hdr where sales_quote_no=?";
+	public static final String SELECT_SALES_QUOTE_HDR = "select customer_code as customer, terms_n_conditions as termCondition,currency as currency, to_char(exp_date_of_delivery,'YYYY-MM-DD') as deliveryDate,sales_quote_no as salesQuoteNo,total as total from sales_order_hdr where sales_order_no=?";
 	public static final String SELECT_SALES_QUOTE = "select customer_code as customer,sales_quote_no as salesQuoteNo from sales_quote_hdr where customer_code=?";
 	public static String SELECT_SALES_QUOTE_DTL= "select sales_quote_no as salesQuoteNo,item_id as item,qty as qty ,quot_price as price from sales_quote_dtl where sales_quote_no=?";
 

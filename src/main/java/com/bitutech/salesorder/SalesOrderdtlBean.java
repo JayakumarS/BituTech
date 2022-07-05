@@ -12,6 +12,8 @@ public class SalesOrderdtlBean {
 	private Integer id;
 	private String text;
 	private String salesQuoteNo;
+	
+
 
 	public Integer getRate() {
 		return rate;

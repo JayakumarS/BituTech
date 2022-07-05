@@ -2,8 +2,6 @@ package com.bitutech.salesorder;
 
 import java.util.List;
 
-import com.bitutech.billofmaterial.BillOfMaterialDtlObjBean;
-
 public class SalesOrderBean {
 	
 	private String customer;
@@ -19,6 +17,10 @@ public class SalesOrderBean {
 	private String salesQuoteNo;
 	private String expectedDate;
 	private Integer total;
+	
+	private String email;
+	
+	private boolean isSuccess;
 	
 	public Integer getTotal() {
 		return total;
@@ -107,6 +109,18 @@ public class SalesOrderBean {
 	}
 	public void setExpectedDate(String expectedDate) {
 		this.expectedDate = expectedDate;
+	}
+	public boolean isSuccess() {
+		return isSuccess;
+	}
+	public void setSuccess(boolean isSuccess) {
+		this.isSuccess = isSuccess;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

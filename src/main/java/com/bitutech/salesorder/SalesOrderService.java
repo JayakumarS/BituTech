@@ -28,4 +28,6 @@ public interface SalesOrderService {
 
 	SalesOrderResultBean getfetchCustomer(String salesQuote) throws Exception;
 
+	SalesOrderResultBean mail(String bean) throws Exception;
+
 }
