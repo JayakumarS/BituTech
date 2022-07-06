@@ -1,5 +1,6 @@
 package com.bitutech.formProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FormPropertyBean {
@@ -13,8 +14,53 @@ public class FormPropertyBean {
 	private String iconName;
 	private List<FormPropertyBean> subMenuList;
 	
+	private int formPropertyId;
+	private String formCode;
+	private String propertyCode;
+	private boolean isEnabled;
+	private boolean isAvailable;
+	private String formName;
+	private String id;
+	private String text;
 	
+	private List<FormPropertyBean> lFormPropertyBean = new ArrayList<FormPropertyBean>();
 	
+	public String getPropertyCode() {
+		return propertyCode;
+	}
+	public void setPropertyCode(String propertyCode) {
+		this.propertyCode = propertyCode;
+	}
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	public String getFormName() {
+		return formName;
+	}
+	public void setFormName(String formName) {
+		this.formName = formName;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
 	public String getIconName() {
 		return iconName;
 	}
@@ -62,6 +108,27 @@ public class FormPropertyBean {
 	}
 	public void setMenuorder(String menuorder) {
 		this.menuorder = menuorder;
+	}
+	public int getFormPropertyId() {
+		return formPropertyId;
+	}
+	public void setFormPropertyId(int formPropertyId) {
+		this.formPropertyId = formPropertyId;
+	}
+	public String getFormCode() {
+		return formCode;
+	}
+	public void setFormCode(String formCode) {
+		this.formCode = formCode;
+	}
+	public List<FormPropertyBean> getlFormPropertyBean() {
+		return lFormPropertyBean;
+	}
+	public void setlFormPropertyBean(List<FormPropertyBean> lFormPropertyBean) {
+		this.lFormPropertyBean = lFormPropertyBean;
+	}
+	public void setFormPropertyBean(FormPropertyBean formPropertyBean) {
+		this.lFormPropertyBean.add(formPropertyBean);
 	}
 	
 	
