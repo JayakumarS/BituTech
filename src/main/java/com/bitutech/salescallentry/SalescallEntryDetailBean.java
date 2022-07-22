@@ -12,6 +12,7 @@ public class SalescallEntryDetailBean {
 	private String reasonSupport;
 	private String reasonNotSupport;
 	private String remarks;
+	private String salesCallDtlObjId;
 	
 	public Integer getSalesCallHdrId() {
 		return salesCallHdrId;
@@ -72,6 +73,12 @@ public class SalescallEntryDetailBean {
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+	public String getSalesCallDtlObjId() {
+		return salesCallDtlObjId;
+	}
+	public void setSalesCallDtlObjId(String salesCallDtlObjId) {
+		this.salesCallDtlObjId = salesCallDtlObjId;
 	}
 
 }

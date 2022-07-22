@@ -535,14 +535,7 @@ public class SalesOrderDaoImpl implements SalesOrderDao {
 
 	private String AttachSavePDf(String certificatecount)
 			throws IOException,  ParseException {
-		try {
-		Document document = new Document();
-		PdfWriter.getInstance(document,new FileOutputStream("/home/paragon/Documents/sample.pdf") );
-		document.add(new Paragraph("Example"));
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+	
 		String filePath = "/home/paragon/Documents/sample.pdf";
 		return filePath;
 }

@@ -133,6 +133,7 @@ public class SalesCallEntryDaoImpl implements SalesCallEntryDao {
 			salesCallEntryMap.put("modeOfContact", bean.getModeOfContact());
 			salesCallEntryMap.put("designation", bean.getDesignation());
 			salesCallEntryMap.put("salesCallHdrId",bean.getSalesCallHdrId());
+			Integer salesCallHdrIdNo = bean.getSalesCallHdrId();
 
 			namedParameterJdbcTemplate.update(SalesEntryMasterQueryUtil.UPDATE_SALESENTRY_HDR,salesCallEntryMap);
 			
@@ -145,8 +146,8 @@ public class SalesCallEntryDaoImpl implements SalesCallEntryDao {
 			             
 			    	for(SalescallEntryDetailBean SalescallEntryDetailBean: bean.getSalescallEntryDetailBean() ){
 			    	
-				    		 Map<String, Object> salesCallEntryDtlMap = new HashMap<String, Object>();
-				 			salesCallEntryDtlMap.put("salesCallHdrId", SalescallEntryDetailBean.getSalesCallHdrId());
+				    		Map<String, Object> salesCallEntryDtlMap = new HashMap<String, Object>();
+				 			salesCallEntryDtlMap.put("salesCallHdrId", salesCallHdrIdNo);
 				 			salesCallEntryDtlMap.put("objective", SalescallEntryDetailBean.getObjective());
 				 			salesCallEntryDtlMap.put("commodity", SalescallEntryDetailBean.getCommodity());
 				 			salesCallEntryDtlMap.put("date", SalescallEntryDetailBean.getDate());
